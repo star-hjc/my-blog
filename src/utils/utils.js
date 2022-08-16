@@ -3,6 +3,11 @@ let timer = 0
 /** 防抖函数是否第一次运行 */
 let throttleIsOne = true
 
+export function openLode(open, timeout = undefined) {
+    console.dir(document.getElementById('page-lode'))
+    document.getElementById('page-lode').style.display = open ? '' : 'none'
+}
+
 /**
  *
  * @param {Function} fn 函数
@@ -32,7 +37,10 @@ export function throttle(fn, delayTime = 1000, immediate = false) {
  * @returns 延时函数
  */
 export function delay(timeout = 1000) {
-    return new Promise(resolve => setTimeout(() => resolve('success'), timeout))
+    let time = null
+    return new Promise(resolve => {
+        time = setTimeout(() => resolve('success'), timeout)
+    }).then(clearTimeout(time))
 }
 
 /**
