@@ -2,6 +2,7 @@
 let timer = 0
 /** 防抖函数是否第一次运行 */
 let throttleIsOne = true
+
 /**
  *      
  * @param {Boolean} open 
