@@ -2,9 +2,12 @@
 let timer = 0
 /** 防抖函数是否第一次运行 */
 let throttleIsOne = true
-
-export function openLode(open, timeout = undefined) {
-    console.dir(document.getElementById('page-lode'))
+/**
+ *      
+ * @param {Boolean} open 
+ * @returns 打开加载动画
+ */
+export function openLode(open) {
     document.getElementById('page-lode').style.display = open ? '' : 'none'
 }
 
