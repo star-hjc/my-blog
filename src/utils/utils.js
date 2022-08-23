@@ -4,15 +4,6 @@ let timer = 0
 let throttleIsOne = true
 
 /**
- *      
- * @param {Boolean} open 
- * @returns 打开加载动画
- */
-export function openLode(open) {
-    document.getElementById('page-lode').style.display = open ? '' : 'none'
-}
-
-/**
  *
  * @param {Function} fn 函数
  * @param {Number} delayTime 延时时间
@@ -87,7 +78,7 @@ export function arrIncludesArr(arrAll, arr, strict = false) {
  */
 export const copyObj = (obj) => {
     let newobj = null
-    if (typeof (obj) !== 'object' || !obj) {
+    if (!obj || typeof (obj) !== 'object') {
         newobj = obj
         return newobj
     }
