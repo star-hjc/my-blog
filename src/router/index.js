@@ -7,7 +7,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'index',
-            // component: HomeLayout,
+            component: () => import('@/layouts/home/HomePage.vue'),
             meta: {
                 title: '首页'
             }
