@@ -13,13 +13,20 @@ export default defineConfig({
             resolvers: [ElementPlusResolver()]
         }),
         Components({
-            resolvers: [ElementPlusResolver()]
+            resolvers: [ElementPlusResolver({ importStyle: 'sass' })]
         })
     ],
     resolve: {
         /** 配置别名 */
         alias: {
             '@': `${path.resolve(__dirname, './src')}/`
+        }
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@use "@/styles/element-puls.scss" as *;`
+            }
         }
     },
     server: {

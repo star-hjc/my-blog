@@ -8,8 +8,9 @@ import store from './store'
 import './utils/window.js'
 /** app节点元素样式 */
 import './styles/index.css'
-/** ElementPlus组件全局主题配置 */
-import './styles/elment-puls.scss'
+/** icon图标 */
+import './styles/iconfont.css'
+import 'element-plus/es/components/message/style/css'
 /** ElementPlus组件中文包 */
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
@@ -23,6 +24,3 @@ app.use(store)
 app.use(ElementPlus, { locale: zhCn })
 
 app.mount('#app')
-
-
-
