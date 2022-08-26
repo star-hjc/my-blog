@@ -1,6 +1,6 @@
 <template>
 
-    <el-scrollbar ref="scrollbarDOM" height="100vh" class="page-box" @scroll="onPageScroll">
+    <el-scrollbar ref="scrollbarDOM" height="100vh" class="page-box" @scroll="onPageScroll" native>
         <headerNav :headerNavBgColor="headerNavBgColor"/>
 
         <div class="home">
