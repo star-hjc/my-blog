@@ -21,7 +21,10 @@
 a, li, button{
   cursor: url('@/assets/img/cursor/link-select.cur'), auto;
 }
-
+a{
+  color: #FFFFFF;
+  text-decoration: none;
+}
 input, textarea{
   cursor: url('@/assets/img/cursor/txt-select.cur'), text;
 }

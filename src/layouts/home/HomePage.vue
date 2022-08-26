@@ -1,7 +1,7 @@
 <template>
 
     <el-scrollbar ref="scrollbarDOM" height="100vh" class="page-box" @scroll="onPageScroll">
-        <headerNav />
+        <headerNav :headerNavBgColor="headerNavBgColor"/>
 
         <div class="home">
             <a>
@@ -17,11 +17,20 @@
     <transition name="animate__animated animate__bounce" enter-active-class="animate__backInRight"
         leave-active-class="animate__backOutRight" appear>
         <div v-show="isShowRigthsideFlot" class="rigthside-flot">
-            <div class="nav">
-                <el-icon class="iconfont icon-down" size="20px" />
+            <div class="nav" title="首页">
+                <router-link to="/">
+                    <el-icon class="iconfont icon-home" size="25px" @click="toPageTop"/>
+                </router-link>
             </div>
-            <div class="nav">
-                <el-icon class="iconfont icon-down" size="20px" />
+            <div class="nav" title="设置">
+                <a>
+                    <el-icon class="iconfont icon-setting is-loading" size="25px" @click="ElMessage.warning('设置功能暂未开放...')"/>
+                </a>
+            </div>
+            <div class="nav" title="回到顶部">
+                <a>
+                    <el-icon class="iconfont icon-course" size="25px" @click="toPageTop"/>
+                </a>
             </div>
         </div>
     </transition>
@@ -30,15 +39,24 @@
 
 <script setup>
 import headerNav from './HeaderNav.vue'
-import { ref } from 'vue'
-
+import { ElMessage } from 'element-plus'
+import { ref, toRaw } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const headerNavBgColor = ref('')
 const scrollbarDOM = ref(null)
 const isShowRigthsideFlot = ref(false)
 const scrollbarDOMisScrollTop = ref(0)
 
-const onPageScroll = (e) => {
-    scrollbarDOMisScrollTop.value = e.scrollTop
-    isShowRigthsideFlot.value = scrollbarDOMisScrollTop.value > 10
+const toPageTop = () => {
+    scrollbarDOM.value.setScrollTop(0)
+}
+
+const onPageScroll = ({ scrollTop }) => {
+    console.log(toRaw(router).currentRoute.value)
+    scrollbarDOMisScrollTop.value = scrollTop
+    isShowRigthsideFlot.value = scrollbarDOMisScrollTop.value > 0
+    headerNavBgColor.value = document.body.clientHeight - scrollTop <= 60 ? 'rgba(0,0,0,0.3)' : ''
 }
 
 const onToNextBegin = () => {
@@ -50,26 +68,8 @@ const onToNextBegin = () => {
 </script>
 
 <style lang="scss" scoped>
-.rigthside-flot {
-    position: fixed;
-    right: 50px;
-    bottom: 70px;
-
-    .nav {
-        height: 35px;
-        width: 35px;
-        border-radius: 5px;
-        margin-top: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: rgba(0, 0, 0, 0.7);
-    }
-}
-
 .page-box {
     overflow-y: auto;
-    overflow-x: hidden;
     background: url('@/assets/img/bg/bg-all.jpg') 50%/cover no-repeat;
     background-color: #163549;
     background-attachment: fixed;
@@ -102,7 +102,40 @@ const onToNextBegin = () => {
     }
 
     .content {
-        height: 200vh;
+        height: 1500vh;
     }
+}
+
+.rigthside-flot {
+    position: fixed;
+    right: 50px;
+    bottom: 70px;
+
+    .nav {
+        height: 35px;
+        width: 35px;
+        border-radius: 5px;
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.7);
+        .icon-course{
+            transform:rotate(-90deg);
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--def-color);
+        }
+
+        &:hover a {
+            color: var(--def-color);
+        }
+    }
+}
+
+.el-scrollbar :deep(.el-scrollbar__wrap) {
+    scroll-behavior: smooth;
 }
 </style>

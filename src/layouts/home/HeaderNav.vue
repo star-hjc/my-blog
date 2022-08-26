@@ -1,5 +1,6 @@
 <template>
-    <div class="header-nav">
+    <div :class="[ 'header-nav', 'animate__animated', headerNavBgColor && 'animate__fadeIn' ]"
+        :style="{ 'background': headerNavBgColor }">
         <div class="logo">
             My-Bolg
         </div>
@@ -14,6 +15,14 @@
 
 <script setup>
 import { onMounted, reactive } from 'vue'
+
+defineProps({
+    headerNavBgColor: {
+        type: String,
+        default: 'rgba(0, 0, 0, 0)'
+    }
+})
+
 const navData = reactive([
     { id: 0, icon: 'icon-play', txt: '搜索', path: '' },
     { id: 1, icon: 'icon-play', txt: '首页', path: '' },
@@ -27,8 +36,8 @@ const navData = reactive([
         ]
     },
     { id: 3, icon: 'icon-play', txt: '我的', path: '' }
-
 ])
+
 onMounted(() => {
 
 })
@@ -59,6 +68,7 @@ onMounted(() => {
     .nav {
         display: flex;
         align-items: center;
+
         .nav-item {
             display: flex;
             align-items: center;
