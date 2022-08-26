@@ -4,10 +4,10 @@
 
 <script setup>
 
-import { onMounted } from "vue"
+import { onMounted } from 'vue'
 
 onMounted(() => {
-  /** 关闭加载动画 */
+    /** 关闭加载动画 */
     openLode(true, 2000)
 })
 </script>

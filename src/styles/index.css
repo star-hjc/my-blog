@@ -1,5 +1,5 @@
 :root {
-  --def-color:#80c8f8;
+  --def-color: #80c8f8;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -14,30 +14,52 @@
   -ms-user-select: none;
   /*早期浏览器*/
   -khtml-user-select: none;
+  /** 鼠标指针 **/
+  cursor: url('@/assets/img/cursor/common.cur'), default;
 }
-body{
+
+a, li, button{
+  cursor: url('@/assets/img/cursor/link-select.cur'), auto;
+}
+
+input, textarea{
+  cursor: url('@/assets/img/cursor/txt-select.cur'), text;
+}
+
+body {
   margin: 0;
   padding: 0;
 }
-#app{
+
+#app {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  overflow-y:auto;
 }
 
-/* 滚动条的宽度 */
-::-webkit-scrollbar {
-	width: 10px;
-	height: 1px;
+
+/** pc端 **/
+@media screen {
+
+  /* 滚动条的宽度 */
+  /* ::-webkit-scrollbar {
+    width: 5px;
+    height: 1px;
+  } */
+
+  /* 滚动条的滑块 */
+  /* ::-webkit-scrollbar-thumb {
+    background-color: #5272df;
+    border-radius: 10px;
+  } */
+
+  /* 滚动条的整个盒子背景色 */
+  /* ::-webkit-scrollbar-track {
+    background-color: #bd6ae0;
+    border-radius: 10px;
+  } */
+
 }
-/* 滚动条的滑块 */
-::-webkit-scrollbar-thumb {
-	background-color: #5272df;
-	border-radius: 10px;
-}
-/* 滚动条的整个盒子背景色 */
-::-webkit-scrollbar-track {
-	background-color: #bd6ae0;
-	border-radius: 10px;
-}
+
+/** 移动端 **/
+@media handheld {}

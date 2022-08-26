@@ -3,12 +3,12 @@
         <div class="logo">
             My-Bolg
         </div>
-        <div class="nav">
-            <div class="nav-item" v-for="nav in navData" :key="nav.id">
+        <ul class="nav">
+            <li class="nav-item" v-for="nav in navData" :key="nav.id">
                 <el-icon :class="['iconfont', nav.icon]" :size="20" />
                 <span>{{ nav.txt }}</span>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -43,6 +43,8 @@ onMounted(() => {
 .header-nav {
     width: 100vw;
     height: 50px;
+    position: fixed;
+    z-index: 998;
     box-sizing: border-box;
     padding: 0 25px;
     display: flex;
@@ -66,7 +68,6 @@ onMounted(() => {
 
             &:hover {
                 color: var(--def-color);
-                cursor: url('@/assets/img/cursor/link-select.cur'), auto;
             }
 
             &::after {
@@ -76,6 +77,7 @@ onMounted(() => {
                 left: 5px;
                 height: 4px;
                 width: 0px;
+                z-index: 999;
                 background-color: var(--def-color);
                 border-radius: 2px;
                 transition: width 0.5s;
