@@ -4,16 +4,14 @@ let timer = 0
 let throttleIsOne = true
 
 /**
- *
+ * deounce(fn.bind(this,$event),2000)
  * @param {Function} fn 函数
  * @param {Number} delayTime 延时时间
  * @param {Boolean} immediate 是否立即执行
  * @returns 防抖函数
  */
-export function throttle(fn, delayTime = 1000, immediate = false) {
-    if (timer) {
-        clearTimeout(timer)
-    }
+export function deounce(fn, delayTime = 1000, immediate = false) {
+    if (timer) clearTimeout(timer)
 
     if (immediate && !timer && throttleIsOne) {
         fn && fn()
@@ -22,6 +20,21 @@ export function throttle(fn, delayTime = 1000, immediate = false) {
     }
 
     timer = setTimeout(() => {
+        fn && fn()
+    }, delayTime)
+}
+
+/**
+ * throttle(fn.bind(this,$event),2000)
+ * @param {Function} fn 函数
+ * @param {Number} delayTime 延时时间
+ * @returns 节流函数
+ */
+export function throttle(fn, delayTime = 1000) {
+    if (timer) return
+
+    timer = setTimeout(() => {
+        clearTimeout(timer)
         fn && fn()
     }, delayTime)
 }
