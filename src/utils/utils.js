@@ -47,8 +47,8 @@ export function throttle(fn, delayTime = 1000) {
 export function delay(timeout = 1000) {
     let time = null
     return new Promise(resolve => {
-        time = setTimeout(() => resolve('success'), timeout)
-    }).then(clearTimeout(time))
+        time = setTimeout(() => { resolve() }, timeout)
+    }).then(() => { clearTimeout(time) })
 }
 
 /**
