@@ -21,7 +21,8 @@ module.exports = {
         'module': true,
         'defineProps': true,
         'defineEmits': true,
-        'openLode': true
+        'openLode': true,
+        'scrollbarLode': true
     },
     'rules': {
         'vue/singleline-html-element-content-newline': 'off',
@@ -174,7 +175,11 @@ module.exports = {
             'after': true
         }],
         'space-before-blocks': [2, 'always'],
-        'space-before-function-paren': [2, 'never'],
+        'space-before-function-paren': [2,'never', {
+            'anonymous': 'always',
+            'named': 'always',
+            'asyncArrow': 'always'
+        }],
         'space-in-parens': [2, 'never'],
         'space-infix-ops': 2,
         'space-unary-ops': [2, {
@@ -194,7 +199,7 @@ module.exports = {
         'no-debugger': 0,
         'no-console': 0,
         'object-curly-spacing': [2, 'always', {
-            objectsInObjects: false
+            objectsInObjects: true
         }],
         'array-bracket-spacing': [2, 'never'],
         'no-async-promise-executor': 'off',
