@@ -32,9 +32,9 @@ export default defineConfig({
     server: {
         /** 跨域配置 */
         proxy: {
-            '/???': {
-                target: 'https://????/',
-                changeOrigin: true
+            '/api': {
+                target: 'http://120.77.79.68:8888/',
+                changeOrigin: true,
             }
         }
     }
