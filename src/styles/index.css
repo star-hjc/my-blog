@@ -18,14 +18,19 @@
   cursor: url('@/assets/img/cursor/common.cur'), default;
 }
 
-a, li, button{
+a,
+li,
+button {
   cursor: url('@/assets/img/cursor/link-select.cur'), auto;
 }
-a{
+
+a {
   color: #FFFFFF;
   text-decoration: none;
 }
-input, textarea{
+
+input,
+textarea {
   cursor: url('@/assets/img/cursor/txt-select.cur'), text;
 }
 
@@ -64,5 +69,55 @@ body {
 
 }
 
+
 /** 移动端 **/
 @media handheld {}
+
+@media (max-width: 1024px) {
+
+  .home-content .left-box {
+    display: none;
+  }
+
+  .home-content .link-box {
+    height: 30vh;
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .home-content .link-box {
+    height: 35vh;
+  }
+}
+
+@media (max-width: 1280px) {
+  .rigth-box-top .glass-card:first-child {
+    display: none;
+
+  }
+
+}
+
+
+/** test class*/
+
+.bor {
+  border: 1px solid red;
+}
+
+.my-flex-c-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-flex-c-n {
+  display: flex;
+  justify-content: center;
+}
+
+.my-flex-n-c {
+  display: flex;
+  align-items: center;
+}

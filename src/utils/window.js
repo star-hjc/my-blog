@@ -4,7 +4,7 @@
  * @param {Number} timeout  关闭时间
  * @returns 打开加载动画
  */
-export function openLode(open, timeout = undefined) {
+function openLode(open = true, timeout = undefined) {
     const pageLode = document.getElementById('page-lode')
     if (timeout && open) {
         pageLode.style.display = ''
@@ -17,8 +17,22 @@ export function openLode(open, timeout = undefined) {
     pageLode.style.display = open ? '' : 'none'
 }
 
+/**
+ *
+ * @param {Number} el  元素
+ * @param {Function} fn 函数
+ * @returns 滚动条动画
+ */
+function scrollbarLode(el = '', fn) {
+    if (!el) console.error('错误：', '没有传入元素名，无法执行自定义滚动条方法...')
+    const lode = document.querySelector(el)
+    lode.style.scrollBehavior = 'smooth'
+    fn && fn()
+    lode.style.scrollBehavior = 'auto'
+}
+
 /** 挂载的方法 */
-const fns = { openLode }
+const fns = { openLode, scrollbarLode }
 
 Object.entries(fns).forEach(([key, fn]) => {
     /** 挂载window实例 */
