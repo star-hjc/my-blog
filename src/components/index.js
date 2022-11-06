@@ -1,6 +1,6 @@
-import baseComponents from './testBaseComponents'
+import cardComponents from './cardComponents'
 
-const components = [baseComponents]
+const components = [cardComponents]
 
 export default {
     install(app) {

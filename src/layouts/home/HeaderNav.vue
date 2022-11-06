@@ -24,18 +24,18 @@ defineProps({
 })
 
 const navData = reactive([
-    { id: 0, icon: 'icon-play', txt: '搜索', path: '' },
-    { id: 1, icon: 'icon-play', txt: '首页', path: '' },
+    { id: 0, icon: 'icon-search', txt: '搜索', path: '' },
+    { id: 1, icon: 'icon-home', txt: '首页', path: '' },
     {
-        id: 2, icon: 'icon-play', txt: '类别', path: '',
+        id: 2, icon: 'icon-mirrorlightctrl', txt: '类别', path: '',
         children: [
             { id: 0, icon: '', txt: '类别1', path: '', disabled: false, divided: false },
             { id: 1, icon: '', txt: '类别2', path: '', disabled: false, divided: false },
             { id: 2, icon: '', txt: '类别3', path: '', disabled: true, divided: true },
-            { id: 3, icon: 'icon-play', txt: '类别4', path: '', disabled: false, divided: false }
+            { id: 3, icon: '', txt: '类别4', path: '', disabled: false, divided: false }
         ]
     },
-    { id: 3, icon: 'icon-play', txt: '我的', path: '' }
+    { id: 3, icon: 'icon-nickname', txt: '我的', path: '' }
 ])
 
 onMounted(() => {

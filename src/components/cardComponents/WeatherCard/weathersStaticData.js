@@ -1,0 +1,37 @@
+export const weathersIcon = {
+    '晴': 'icon-weather-1',
+    '多云': 'icon-weather-2',
+    '阴': 'icon-weather-3',
+    '阵雨': 'icon-weather-4',
+    '雷阵雨': 'icon-weather-5',
+    '风': 'icon-wind',
+    '雨夹雪': 'icon-weather-7',
+    '小雨': 'icon-weather-8',
+    '中雨': 'icon-weather-9',
+    '大雨': 'icon-weather-10',
+    '暴雨': 'icon-weather-11',
+    '大暴雨': 'icon-weather-12',
+    '特大暴雨': 'icon-weather-13',
+    '小雪': 'icon-weather-15',
+    '中雪': 'icon-weather-16',
+    '大雪': 'icon-weather-17',
+    '暴雪': 'icon-weather-18',
+    '雾': 'icon-weather-19',
+    '冻雨': 'icon-weather-20',
+    '沙尘暴': 'icon-weather-21',
+    '霾': 'icon-haze',
+    '雷电': 'icon-thunder',
+    '冰雹': 'icon-hail',
+    '杨沙': 'icon-stand-storm',
+    '浮尘': 'icon-floating-dust',
+    '霜冻': 'icon-frost',
+    '台风': 'icon-typhoon',
+    '春': 'icon-spring',
+    '夏': 'icon-summer',
+    '秋': 'icon-autumn',
+    '冬': 'icon-winter',
+}
+
+export const direction = { 1: '东北风', 2: '东风', 3: '东南风', 4: '南风', 5: '西南风', 6: '西风', 7: '西北风', 8: '北风' }
+
+export const numberTxt = ['零','一','二','三','四','五','六','七','八','九','十']

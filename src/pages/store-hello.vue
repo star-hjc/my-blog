@@ -24,6 +24,7 @@ const adminsStore = adminStore()
 onMounted(() => {
     openLode(false)
 })
+
 const { name } = storeToRefs(adminsStore)
 const { fullName: fullNameaJg, updateName } = adminsStore
 updateName('admin管理员')
@@ -31,7 +32,6 @@ updateName('admin管理员')
 const { fullName: fullNameJg } = userStore
 const { fullName } = storeToRefs(userStore)
 userStore.updateName('乖乖')
-
 </script>
 
 <style scoped>
