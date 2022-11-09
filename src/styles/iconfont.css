@@ -6,12 +6,29 @@
     url('@/assets/icon/iconfont.ttf?t=1667544908924') format('truetype');
 }
 
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mail-fill:before {
+  content: "\e86f";
+}
+
+.icon-QQ:before {
+  content: "\e882";
+}
+
+.icon-wechat-fill:before {
+  content: "\e883";
+}
+
+.icon-github-fill:before {
+  content: "\e885";
 }
 
 .icon-weather-3:before {
@@ -460,10 +477,6 @@
 
 .icon-addresslist:before {
   content: "\e6f1";
-}
-
-.icon-address1:before {
-  content: "\e6f2";
 }
 
 .icon-cancelwhite:before {
@@ -953,3 +966,4 @@
 .icon-privacy:before {
   content: "\e6b1";
 }
+
