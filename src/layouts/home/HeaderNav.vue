@@ -58,6 +58,7 @@ onMounted(() => {
     padding: 0 25px;
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
 
     .logo {
         display: flex;

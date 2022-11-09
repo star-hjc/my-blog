@@ -118,8 +118,8 @@ onMounted(() => {
     }
 
     .action {
-        animation-name: icon-action;
         position: relative;
+        animation-name: icon-action;
         /* 持续时间 */
         animation-duration: 1.5s;
         animation-iteration-count: infinite;
