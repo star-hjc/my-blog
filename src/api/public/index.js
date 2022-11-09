@@ -56,4 +56,13 @@ export const getWeatherAddress = (address) => {
         params: { address }
     })
 }
+/**
+ * 
+ * @returns 获取禅语
+ */
+export const getSaying = () =>{
+    return requst({
+        url: `https://v1.hitokoto.cn/`,
+    })
+}
 
