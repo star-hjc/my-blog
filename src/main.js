@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementPlus from 'element-plus'
 import router from './router'
 import store from './store'
 
@@ -16,19 +15,17 @@ import './styles/iconfont.css'
 import './styles/font.css'
 /** element 消息组件样式 */
 import 'element-plus/es/components/message/style/css'
-/** ElementPlus组件中文包 */
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import 'element-plus/es/components/message-box/style/css'
+
 /** 自定义组件 */
-import myComponents from './components/index'
+import myCustomComponents from './components'
 
 const app = createApp(App)
 /** 自定义组件注册 */
-myComponents.install(app)
+myCustomComponents.install(app)
 /** 路由 - VueRouter */
 app.use(router)
 /** 状态管理器 - Pinia */
 app.use(store)
-/** 组件 - ElementPlus(中文) */
-app.use(ElementPlus, { locale: zhCn })
 
 app.mount('#app')
