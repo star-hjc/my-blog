@@ -1,5 +1,12 @@
+
+/* 主字体 */
+@font-face {
+    font-family: "MiSans";
+    src: url('@/assets/font/MiSansNormal.ttf') format('truetype');
+}
+
+/* LED字体 */
 @font-face {
     font-family: "Open24DisplaySt";
-    /* LED字体 */
     src: url('@/assets/font/Open24DisplaySt.ttf') format('truetype');
 }
