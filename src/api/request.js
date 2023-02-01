@@ -34,10 +34,11 @@ axiosInstance.interceptors.response.use(
         return response
     },
     error => {
-        console.log('[网络出错日志]', error)
         if (error && error.response) {
             const errMessage = {
-                400: '错误请求', 401: '未授权，请重新登录',
+                0: '网络未连接，请检查网络状态...',
+                400: '错误请求',
+                401: '未授权，请重新登录',
                 403: '拒绝访问',
                 404: '请求错误,未找到该资源',
                 405: '请求方法未允许',
