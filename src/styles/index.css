@@ -1,10 +1,4 @@
 :root {
-  --def-color: #80c8f8;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: #FFFFFF;
-  background: #d2d2d2;
   user-select: none;
   /*火狐*/
   -moz-user-select: none;
@@ -14,11 +8,69 @@
   -ms-user-select: none;
   /*早期浏览器*/
   -khtml-user-select: none;
-  /** 鼠标指针 **/
+  /** 鼠标指针 */
   cursor: url('@/assets/img/cursor/common.cur'), default;
+  /** 主字体引用 */
+  font-family: MiSans;
+
+  /** animateStyle 动画时间 */
+  --animate-duration: 0.5s;
+
+  --float-color: #80c8f8;
+  --float-title-color: #20a2f9;
+
+  color: var(--font-color);
+  background: var(--global-bg);
 }
 
+
+/** 主题切换 **/
+html[data-theme='light'] {
+  --global-bg: #fff;
+  --card-color: #ffffff;
+  --font-color: #4c4948;
+}
+
+html{
+  --global-bg: #0d0d0d;
+  --card-color: #121212;
+  --font-color: rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme='light'] #app::before {
+  position: fixed;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color .8s;
+  pointer-events: none;
+}
+
+html #app::before{
+  position: fixed;
+  content: '';
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  transition: background-color .8s;
+  pointer-events: none;
+}
+
+html .page-box::before {
+  position: fixed;
+  content: '';
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/** 默认样式修改 **/
 a,
+i,
 li,
 button {
   cursor: url('@/assets/img/cursor/link-select.cur'), auto;
@@ -40,84 +92,16 @@ body {
 }
 
 #app {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
+/* 小型设备（平板电脑，768px 以上） */
+@media screen and (max-width:768px) {}
 
-/** pc端 **/
-@media screen {
+/* 中型设备（台式电脑，992px 以上） */
+@media screen and (max-width:992px) {}
 
-  /* 滚动条的宽度 */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 1px;
-  }
-
-  /* 滚动条的滑块 */
-  ::-webkit-scrollbar-thumb {
-    cursor: url('@/assets/img/cursor/link-select.cur'), auto;
-    background-color: #1f1f1f;
-    border-radius: 10px;
-  }
-
-  /* 滚动条的整个盒子背景色 */
-  ::-webkit-scrollbar-track {
-    background: #464646;
-  }
-
-}
-
-
-/** 移动端 **/
-@media handheld {}
-
-@media (max-width: 1024px) {
-
-  .home-content .left-box {
-    display: none;
-  }
-
-  .home-content .link-box {
-    height: 30vh;
-  }
-}
-
-@media (min-width: 1024px) {
-
-  .home-content .link-box {
-    height: 35vh;
-  }
-}
-
-@media (max-width: 1280px) {
-  .rigth-box-top .glass-card:first-child {
-    display: none;
-
-  }
-
-}
-
-
-/** test class*/
-
-.bor {
-  border: 1px solid red;
-}
-
-.my-flex-c-c {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.my-flex-c-n {
-  display: flex;
-  justify-content: center;
-}
-
-.my-flex-n-c {
-  display: flex;
-  align-items: center;
-}
+/* 大型设备（大台式电脑，1200px 以上）*/
+@media screen and (max-width:1200px) {}

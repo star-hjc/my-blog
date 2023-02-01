@@ -32,7 +32,7 @@
 
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
-import { getIPInfo, getWeatherByCounty, getWeatherAddress } from '@/api/public/index.js'
+import { getIPInfo, getWeatherByCounty, getWeatherAddress } from '@/api/public'
 import { weathersIcon, direction } from './weathersStaticData.js'
 
 let address = ref('')
@@ -52,7 +52,6 @@ const vData = reactive({
         wind_direction: '',
         /** 风速等级 */
         wind_power: '',
-
     }
 })
 

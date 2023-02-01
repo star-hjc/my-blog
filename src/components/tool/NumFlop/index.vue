@@ -34,7 +34,6 @@ onMounted(() => {
  * @param {Number} delays 计数动画的总持续时间
  */
 const digital = async (time = 100, delays = 2000, num) => {
-    // console.log(time, delays, num)
     let ss = 0
     const divisions = delays / time
     const isComma = /[0-9]+,[0-9]+/.test(num)
@@ -48,7 +47,7 @@ const digital = async (time = 100, delays = 2000, num) => {
 
     for (let i = 1; i <= divisions; i++) {
         if (i) await delay(time)
-        const newNum = parseFloat(num / divisions * i).toFixed(decimalPlaces);
+        let newNum = parseFloat(num / divisions * i).toFixed(decimalPlaces);
 
         if (isComma && newNum.length > 3) {
             while (/(\d+)(\d{3})/.test(newNum)) {

@@ -1,6 +1,8 @@
-import cardComponents from './cardComponents'
+import toolComponents from './tool'
+import cardComponents from './card'
 
-const components = [cardComponents]
+
+const components = [cardComponents, toolComponents]
 
 export default {
     install(app) {

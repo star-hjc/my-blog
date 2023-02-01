@@ -79,7 +79,7 @@ export function isObjAndNotEmpty(val) {
 export function arrIncludesArr(arrAll, arr, strict = false) {
     for (const item of arr) {
         if (!strict && !arrAll.join().includes(item)) return false
-        if (strict && !arrAll.includes(item)) return false
+        if (!arrAll.includes(item)) return false
     }
     return true
 }
