@@ -1,11 +1,10 @@
 @font-face {
   font-family: "iconfont";
-  /* Project id 3607597 */
-  src: url('@/assets/icon/iconfont.woff2?t=1667544908924') format('woff2'),
-    url('@/assets/icon/iconfont.woff?t=1667544908924') format('woff'),
-    url('@/assets/icon/iconfont.ttf?t=1667544908924') format('truetype');
+  src: 
+    url("@/assets/icon/iconfont.woff2?t=1675273573171") format("woff2"),
+    url("@/assets/icon/iconfont.woff?t=1675273573171") format("woff"),
+    url("@/assets/icon/iconfont.ttf?t=1675273573171") format("truetype");
 }
-
 
 .iconfont {
   font-family: "iconfont" !important;
@@ -227,10 +226,6 @@
   content: "\e6b2";
 }
 
-.icon-brightness1:before {
-  content: "\e6b3";
-}
-
 .icon-privac_open:before {
   content: "\e6b4";
 }
@@ -305,10 +300,6 @@
 
 .icon-layered:before {
   content: "\e6c6";
-}
-
-.icon-collection:before {
-  content: "\e6c7";
 }
 
 .icon-soundsize:before {
@@ -471,10 +462,6 @@
   content: "\e6ef";
 }
 
-.icon-checkmore1:before {
-  content: "\e6f0";
-}
-
 .icon-addresslist:before {
   content: "\e6f1";
 }
@@ -527,16 +514,8 @@
   content: "\e6fe";
 }
 
-.icon-genieSEC:before {
-  content: "\e6ff";
-}
-
 .icon-info:before {
   content: "\e700";
-}
-
-.icon-geniecommunity:before {
-  content: "\e701";
 }
 
 .icon-housecare:before {
@@ -593,10 +572,6 @@
 
 .icon-search:before {
   content: "\e70f";
-}
-
-.icon-huoyan:before {
-  content: "\e710";
 }
 
 .icon-paymentlife:before {
@@ -966,4 +941,3 @@
 .icon-privacy:before {
   content: "\e6b1";
 }
-
