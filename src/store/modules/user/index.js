@@ -1,17 +1,28 @@
-import { defineStore } from 'pinia';
-
-const useUserStore = defineStore('user', () => {
-  const userName = ref('用户名称')
-  const PersonalSignature = ref('个性签名...,**个**.')
-  /**
-   *  修改State的值
-   *  @param {Object} data 修改的数据
-   */
-  function setData(data) {
-    useUserStore.$patch(data)
-  }
-
-  return { userName, PersonalSignature, setData }
+export default defineStore({
+    /** id必填，且需要唯一 */
+    id: 'user',
+    state: () => {
+        return {
+            userId: '',
+            userName: '用户',
+            code: '',
+            portrait: createPortrait({ txt: '用户', limit: true }),
+            WeChat: '',
+            QQ: '',
+            /** 个签 */
+            personalSignature: ''
+        }
+    },
+    actions: {
+        setData (partial) {
+            this.$patch(partial)
+        }
+    },
+    getters: {
+        getState: (state) => {
+            return (key) => {
+                return key ? state[key] : { ...state }
+            }
+        }
+    }
 })
-
-export default useUserStore

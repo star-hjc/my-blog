@@ -10,7 +10,7 @@ let throttleIsOne = true
  * @param {Boolean} immediate 是否立即执行
  * @returns 防抖函数
  */
-export function deounce(fn, delayTime = 1000, immediate = false) {
+export function deounce (fn, delayTime = 1000, immediate = false) {
     if (timer) clearTimeout(timer)
 
     if (immediate && !timer && throttleIsOne) {
@@ -30,9 +30,8 @@ export function deounce(fn, delayTime = 1000, immediate = false) {
  * @param {Number} delayTime 延时时间
  * @returns 节流函数
  */
-export function throttle(fn, delayTime = 1000) {
+export function throttle (fn, delayTime = 1000) {
     if (timer) return
-
     timer = setTimeout(() => {
         clearTimeout(timer)
         fn && fn()
@@ -44,7 +43,7 @@ export function throttle(fn, delayTime = 1000) {
  * @param {Number} timeout 延时结束时间
  * @returns 延时函数
  */
-export function delay(timeout = 1000) {
+export function delay (timeout = 1000) {
     let time = null
     return new Promise(resolve => {
         time = setTimeout(() => { resolve() }, timeout)
@@ -56,7 +55,7 @@ export function delay(timeout = 1000) {
  * @param {Array} val 值
  * @returns 空的数组 ? false : true
  */
-export function isArrAndNotEmpty(val) {
+export function isArrAndNotEmpty (val) {
     return Array.isArray(val) && val.length !== 0
 }
 
@@ -65,7 +64,7 @@ export function isArrAndNotEmpty(val) {
  * @param {Object} val 值
  * @returns 空的对象 ? false : true
  */
-export function isObjAndNotEmpty(val) {
+export function isObjAndNotEmpty (val) {
     return Object.keys(val).length > 0
 }
 
@@ -76,7 +75,7 @@ export function isObjAndNotEmpty(val) {
  * @param {Boolean} strict 开启严格模式
  * @returns arrAll包含arr[Booler]
  */
-export function arrIncludesArr(arrAll, arr, strict = false) {
+export function arrIncludesArr (arrAll, arr, strict = false) {
     for (const item of arr) {
         if (!strict && !arrAll.join().includes(item)) return false
         if (!arrAll.includes(item)) return false

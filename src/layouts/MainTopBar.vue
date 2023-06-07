@@ -1,11 +1,11 @@
 <template>
   <div class="main-top-bar" :class="{ full: isFull }" :style="`background: url(${wallpaper}) 50%/cover no-repeat;`">
-    <div v-if="isDynamic" class="dynamic-wallpaper">
+    <div v-if="play" class="dynamic-wallpaper">
       <video ref="dynamicWallpaperDOM" :muted="String(isOpenMuted)" autoplay loop>
         <source v-for="item, index in dynamicWallpaper" :key="index" :src="item.url" :type="item.type" />
       </video>
     </div>
-    <h1 class="title">{{ title }}</h1>
+    <h2 class="title">{{ title }}</h2>
     <slot />
   </div>
 </template>
@@ -17,55 +17,54 @@ import { useAppStore } from '@/store'
 
 const appStore = useAppStore()
 
+const { wallpaper, dynamicWallpaper } = storeToRefs(appStore)
+
 const prop = defineProps({
-  title: {
-    type: String,
-    default: '标题'
-  },
-  /** 是否一开始占全屏 */
-  isFull: {
-    type: Boolean,
-    default: false
-  },
-  /** 静态壁纸 */
-  wallpaper: {
-    type: [String, Array],
-    default: new URL('../assets/img/bg/bg-home.jpg', import.meta.url).href
-  },
-  /** 动态壁纸 */
-  dynamicWallpaper: {
-    type: Array,
-    default: [
-      { url: new URL('../assets/mp4/xxx.mp4', import.meta.url).href, type: 'video/mp4' }
-    ]
-  },
-  /** 开启动态壁纸 */
-  isDynamic: {
-    type: Boolean,
-    default: false
-  },
-  /** 打开动态壁纸音频 */
-  isOpenMuted: {
-    type: Boolean,
-    default: false
-  }
+    title: {
+        type: String,
+        default: '标题'
+    },
+    /** 是否一开始占全屏 */
+    isFull: {
+        type: Boolean,
+        default: false
+    },
+    /** 开启动态壁纸 */
+    isDynamic: {
+        type: Boolean,
+        default: false
+    },
+    /** 打开动态壁纸音频 */
+    isOpenMuted: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const dynamicWallpaperDOM = ref(null)
 
+const play = ref(prop.isDynamic)
+
 onMounted(() => {
-  const { equipment, os, getEquipment } = appStore
-  if (getEquipment(equipment) === 1 && prop.isDynamic) return message(os)
+    const { os } = appStore
+    const lodeDynamic = sessionStorage.getItem('lodeDynamic')
+    if (lodeDynamic === '0') {
+        play.value = false
+        return
+    }
+    if (lodeDynamic === '1') return dynamicWallpaperDOM.value.play()
+    if (play.value) return message(os)
 })
 
 const message = (title = '') => {
-  ElMessageBox.confirm('是否加载动态壁纸?', title.toUpperCase())
-    .then(() => {
-      dynamicWallpaperDOM.value.play()
-    })
-    .catch(() => {
-
-    })
+    ElMessageBox.confirm('是否加载动态壁纸?', title.toUpperCase())
+        .then(() => {
+            dynamicWallpaperDOM.value.play()
+            sessionStorage.setItem('lodeDynamic', '1')
+        })
+        .catch(() => {
+            sessionStorage.setItem('lodeDynamic', '0')
+        })
 }
 </script>
 
@@ -102,6 +101,7 @@ const message = (title = '') => {
 
   & .title {
     z-index: 1;
+    padding: 0 30px;
   }
 
   .icon-box .el-icon {

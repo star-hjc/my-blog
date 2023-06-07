@@ -17,8 +17,14 @@ export default defineConfig({
             open: true
         }),
         AutoImport({
-            imports: ['vue'],
-            resolvers: [ElementPlusResolver()]
+            imports: ['vue', 'pinia'],
+            resolvers: [ElementPlusResolver()],
+            eslintrc: {
+                /** 生成变量白名单,手动改true保存再改false */
+                enabled: false,
+                filepath: './.eslintrc-auto-import.json',
+                globalsPropValue: true
+            }
         }),
         Components({
             resolvers: [ElementPlusResolver({ importStyle: 'sass' })]
@@ -41,35 +47,34 @@ export default defineConfig({
         /** 启动打开网页 */
         open: true,
         /** 开启热更新 */
-        hmr: true,
+        // hmr: true,
         // host:'0.0.0.0',
         /** 跨域配置 */
         proxy: {
             '/api': {
-                target: 'http://120.77.79.68:8888/',
-                changeOrigin: true,
+                target: 'http://127.0.0.1:6666/',
+                changeOrigin: true
             }
         }
     },
     build: {
         rollupOptions: {
             output: {
-                manualChunks(buildFilePath) {
+                manualChunks (buildFilePath) {
                     // if (nodeModules) {
                     //     // console.log(buildFilePath.split('node_modules/')[1].split('/')[0]);
                     //     return buildFilePath.split('node_modules/')[1].split('/')[0];
                     // }
-                    if (buildFilePath.indexOf('node_modules') === -1 && buildFilePath.includes('components/card/')) {
-                        console.log(String(buildFilePath));
-                        return buildFilePath.split('components/card/')[1].split('.')[0]
-                    }
+                    // if (buildFilePath.indexOf('node_modules') === -1 && buildFilePath.includes('components/card/')) {
+                    //     return buildFilePath.split('components/card/')[1].split('.')[0]
+                    // }
                     // if ( nodeModules && buildFilePath.includes('element-plus/')) {
                     //     console.log(buildFilePath.split('element-plus/')[1].split('/')[0]);
                     // }
 
-                    function pathIsExist(name) {
-                        return buildFilePath.indexOf(name) !== -1
-                    }
+                    // function pathIsExist(name) {
+                    //     return buildFilePath.indexOf(name) !== -1
+                    // }
                 }
             }
         }

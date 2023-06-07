@@ -1,67 +1,93 @@
 <template>
-    <!-- <div :class="[ 'top-bar', 'animate__animated', headerNavBgColor && 'animate__fadeInDown' ]" -->
     <header class="top-bar" :style="{ 'background': topBarBgColor }">
         <div class="logo">
-            My-Bolg
+            Star is Blog
         </div>
         <ul class="nav">
-            <li class="nav-item" v-for="nav in navData" :key="nav.id" @click="nav.event">
+            <li class="nav-item" :class="{ 'no-mobile': nav.equipment === 2, 'mobile': nav.equipment === 1 }"
+                v-for="nav in navData" :key="nav.id" @click="events(nav)">
                 <router-link :to="nav.path">
                     <IconLayout :iconClass="`iconfont ${nav.icon}`" size="1.5rem">
-                        <span>{{ nav.txt }}</span>
+                        <span class="nav-txt">{{ nav.txt }}</span>
                     </IconLayout>
                 </router-link>
             </li>
-        </ul>
-        <ul class="nav-mobile">
-            <li class="nav-item" v-for="nav in navMobileData" :key="nav.id" @click="nav.event">
-                <router-link :to="nav.path">
-                    <IconLayout :iconClass="`iconfont ${nav.icon}`" size="1.5rem" />
-                </router-link>
+            <li v-if="!userStore.code" class="nav-item no-mobile" @click="appStore.onShowLoginModel()">
+                <IconLayout :iconClass="`iconfont icon-nickname`" size="1.5rem">
+                    <span class="nav-txt">登录</span>
+                </IconLayout>
+            </li>
+            <li v-else class="no-mobile">
+                <el-dropdown class="item">
+                    <img class="portrait" :src="userStore.portrait" />
+                    <template #dropdown>
+                        <el-dropdown-item>
+                            <IconLayout :iconClass="`iconfont icon-nickname`" size="1rem">
+                                <span @click="appStore.onShowMyModel()">个人信息</span>
+                            </IconLayout>
+                        </el-dropdown-item>
+                        <!-- <el-dropdown-item>
+                            <IconLayout :iconClass="`iconfont icon-respond`" size="1rem">
+                                <span>消息中心</span>
+                            </IconLayout>
+                        </el-dropdown-item> -->
+                        <el-dropdown-item @click="onSignOut">
+                            <IconLayout :iconClass="`iconfont icon-getout`" size="1rem">
+                                <span>退出登录</span>
+                            </IconLayout>
+                        </el-dropdown-item>
+                    </template>
+                </el-dropdown>
             </li>
         </ul>
     </header>
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { useAppStore, useUserStore } from '@/store'
+import { onMounted } from 'vue'
 
-const prop = defineProps({
+const appStore = useAppStore()
+const userStore = useUserStore()
+
+defineProps({
     topBarBgColor: {
         type: String,
         default: 'rgba(0, 0, 0, 0)'
-    },
-    events: {
-        type: Object,
-        required: true
     }
 })
 
-const navMobileData = reactive([
-    { id: 0, icon: 'icon-search', txt: '搜索', path: '' },
-    { id: 1, icon: 'icon-menu', txt: '菜单', path: '',event:prop.events.onShowRigthMenu }
-])
-
+/** equipment 0 未知（都显示）1：手机端显示 2：电脑端、平板端显示 */
 const navData = reactive([
-    { id: 0, icon: 'icon-search', txt: '搜索', path: '' },
-    { id: 1, icon: 'icon-home', txt: '首页', path: '/home' },
-    {
-        id: 2, icon: 'icon-mirrorlightctrl', txt: '类别', path: '/category',
-        children: [
-            { id: 0, icon: '', txt: '类别1', path: '', disabled: false, divided: false },
-            { id: 1, icon: '', txt: '类别2', path: '', disabled: false, divided: false },
-            { id: 2, icon: '', txt: '类别3', path: '', disabled: true, divided: true },
-            { id: 3, icon: '', txt: '类别4', path: '', disabled: false, divided: false }
-        ]
-    },
-    { id: 3, icon: 'icon-nickname', txt: '我的', path: '/', event: prop.events.onShowLoginBox }
+    { id: 0, icon: 'icon-search', txt: '搜索', path: '', event: 'search', equipment: 0 },
+    { id: 1, icon: 'icon-home', txt: '首页', path: '/index', event: '', equipment: 2 },
+    { id: 2, icon: 'icon-agreement', txt: '标签', path: '/tag', event: '', equipment: 2 },
+    { id: 3, icon: 'icon-mirrorlightctrl', txt: '类别', path: '/category', event: '', equipment: 2 },
+    { id: 4, icon: 'icon-suggestion', txt: '归档', path: '/archive', event: '', equipment: 2 },
+    { id: 5, icon: 'icon-menu', txt: '菜单', path: '', event: 'menu', equipment: 1 }
 ])
-
-
 
 onMounted(() => {
-
 })
+
+function events (nav) {
+    if (nav.path) return
+    switch (nav.event) {
+        case 'menu':
+            appStore.onShowRigthMenuModer()
+            break
+        case 'search':
+            appStore.onShowSearchModel()
+            break
+        default:
+            break
+    }
+}
+
+function onSignOut () {
+    localStorage.removeItem('TOKEN')
+    userStore.$reset()
+}
 
 </script>
 
@@ -71,7 +97,7 @@ onMounted(() => {
     height: 50px;
     color: #fff;
     position: fixed;
-    z-index: 998;
+    z-index: 996;
     box-sizing: border-box;
     padding: 0 25px;
     display: flex;
@@ -84,8 +110,7 @@ onMounted(() => {
         justify-content: center;
     }
 
-    .nav,
-    .nav-mobile {
+    .nav {
         display: flex;
         align-items: center;
 
@@ -115,24 +140,31 @@ onMounted(() => {
                 width: calc(100%);
             }
         }
+
+        .portrait {
+            border-radius: 100%;
+            height: 35px;
+        }
     }
 }
-
 
 @media (max-width:768px) {
     .top-bar {
         padding-right: 0;
 
-        .nav {
+        .no-mobile {
+            display: none;
+        }
+
+        .nav-txt {
             display: none;
         }
     }
 }
 
 @media (min-width:769px) {
-
     .top-bar {
-        .nav-mobile {
+        .mobile {
             display: none;
         }
     }

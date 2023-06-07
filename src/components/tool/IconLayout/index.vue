@@ -7,30 +7,31 @@
 </template>
 
 <script setup>
-const prop = defineProps({
-  iconClass: {
-    type: String,
-    required: true
-  },
-  size: {
-    type: String,
-    default: ''
-  },
-  color: {
-    type: String,
-    default: ''
-  },
-  iconStyle: {
-    type: String,
-    default: ''
-  },
+defineProps({
+    iconClass: {
+        type: String,
+        required: true
+    },
+    size: {
+        type: String,
+        default: ''
+    },
+    color: {
+        type: String,
+        default: ''
+    },
+    iconStyle: {
+        type: String,
+        default: ''
+    }
 })
 </script>
 
 <style lang="scss" scoped>
 .icon-layout {
   display: inline-flex;
+  flex-direction:row;
   align-items: center;
-  cursor: url('@/assets/img/cursor/link-select.cur'), default;
+  cursor: url('@/assets/img/cursor/link-select.cur'), pointer;
 }
 </style>

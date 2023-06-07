@@ -8,22 +8,20 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUpdate, ref, computed } from 'vue'
-
 const prop = defineProps({
-  content: {
-    type: [String, Array],
-    required: true
-  },
-  speed: {
-    type: Number,
-    default: 0.5,
-    validator(value) {
-      const bool = value <= 1 && value >= 0
-      if (!bool) console.warn('speed值应大于0小于1');
-      return bool
+    content: {
+        type: [String, Array],
+        required: true
+    },
+    speed: {
+        type: Number,
+        default: 0.5,
+        validator (value) {
+            const bool = value <= 1 && value >= 0
+            if (!bool) console.warn('speed值应大于0小于1')
+            return bool
+        }
     }
-  }
 })
 
 const noticeDOM = ref(null)
@@ -32,36 +30,21 @@ const noticeWidth = ref(0)
 const duration = ref(13)
 const newContent = computed(() => (Array.isArray(prop.content) ? prop.content : [prop.content]))
 
-
 onMounted(() => {
-  init()
+    noticeWidth.value = noticeDOM.value.offsetWidth
+    window.onresize = () => {
+        if (!noticeDOM.value || !noticeWidth.value) return
+        noticeWidth.value = noticeDOM.value.offsetWidth
+        const newSpeed = prop.speed >= 1 ? 100 : prop.speed * 100
+        duration.value = contentDOM.value.offsetWidth / newSpeed
+    }
 })
-
-onBeforeUpdate(() => {
-  init()
-})
-const init = () => {
-  getElementWidth()
-  setSpeed()
-}
-
-const getElementWidth = () => {
-  noticeWidth.value = noticeDOM.value.offsetWidth
-}
-
-const setSpeed = () => {
-  setTimeout(() => {
-    const newSpeed = prop.speed >= 1 ? 100 : prop.speed * 100
-    duration.value = contentDOM.value.offsetWidth / newSpeed
-  }, 500)
-}
-
-
 
 </script>
 
 <style lang='scss' scoped>
 .notice-scrol {
+  width: 100%;
   display: flex;
   overflow: hidden;
 

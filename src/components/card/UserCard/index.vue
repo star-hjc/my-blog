@@ -1,10 +1,10 @@
 <template>
-  <DefCard class="user-card">
+  <div class="user-card">
     <div class="portrait-box">
-      <img src="https://unsplash.it/100/100?image=295" @error="imgErr($event)"/>
+      <img :src="portrait" @error="imgErr($event)" />
     </div>
-    <span class="user-name">UserName</span>
-    <span class="signature">个性签名</span>
+    <span class="user-name">{{ userName }}</span>
+    <span class="signature">{{ personalSignature }}</span>
     <div class="my-info">
       <router-link to="/" :title="toValue(blogNum)">
         <div>文章</div>
@@ -12,61 +12,53 @@
           {{ toValue(blogNum) }}
         </div>
       </router-link>
-      <router-link to="/" :title="toValue(tagNum)">
+      <router-link to="/" :title="toValue(labels.length)">
         <div>标签</div>
-        <div :class="{ overstep: isOverstep(tagNum) }">
-          {{ toValue(tagNum) }}
+        <div :class="{ overstep: isOverstep(labels.length) }">
+          {{ toValue(labels.length) }}
         </div>
       </router-link>
-      <router-link to="/" :title="toValue(classNum)">
+      <router-link to="/" :title="toValue(0)">
         <div>分类</div>
-        <div :class="{ overstep: isOverstep(classNum) }">
-          {{ toValue(classNum) }}
+        <div :class="{ overstep: isOverstep(0) }">
+          {{ toValue(0) }}
         </div>
       </router-link>
     </div>
-  </DefCard>
+  </div>
 </template>
 
 <script setup>
 
 import { computed } from 'vue'
+import { useUserStore, useBlogStore } from '@/store'
+
+const { labels, blogNum } = storeToRefs(useBlogStore())
+const { portrait, userName, personalSignature } = storeToRefs(useUserStore())
 
 const prop = defineProps({
-  blogNum: {
-    type: Number,
-    default: 0
-  },
-  tagNum: {
-    type: Number,
-    default: 0
-  },
-  classNum: {
-    type: Number,
-    default: 0
-  },
-  maxNum: {
-    type: Number,
-    default: 999
-  }
+    maxNum: {
+        type: Number,
+        default: 999
+    }
 })
 
 const isOverstep = computed(() => {
-  return (value) => {
-    return value > prop.maxNum
-  }
+    return (value) => {
+        return value > prop.maxNum
+    }
 })
 
 const toValue = computed(() => {
-  return (value) => {
-    return value > prop.maxNum ? prop.maxNum : value
-  }
+    return (value) => {
+        return (value || 0) > prop.maxNum ? prop.maxNum : value || 0
+    }
 })
 
 const imgErr = (e) => {
-  const imgDOM = e.srcElement
-  imgDOM.src = new URL('../../../assets/img/bg/bg-home.jpg', import.meta.url).href
-  imgDOM.onerror = null
+    const imgDOM = e.srcElement
+    imgDOM.src = new URL('../../../assets/img/bg/bg-home.jpg', import.meta.url).href
+    imgDOM.onerror = null
 }
 
 </script>
@@ -74,8 +66,8 @@ const imgErr = (e) => {
 <style lang='scss' scoped>
 .user-card {
   display: flex;
+  padding: 20px;
   flex-direction: column;
-  padding: 10% 5%;
   align-items: center;
 
   .portrait-box {
@@ -88,6 +80,7 @@ const imgErr = (e) => {
     img {
       width: 100%;
       height: 100%;
+      cursor: url('@/assets/img/cursor/link-select.cur'), pointer;
       transform: rotate(0deg);
       transition: transform 0.8s;
     }

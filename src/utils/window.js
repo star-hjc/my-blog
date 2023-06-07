@@ -1,26 +1,20 @@
 /**
  *
- * @param {Boolean} open    开关
- * @param {Number} timeout  关闭时间
- * @returns 打开加载动画
+ * @param {Boolean |Number} openOrTimeout  开关 | 关闭时间
+ * @returns 开关加载动画
  */
-function openLode(open = true, timeout = undefined) {
+function openLode (openOrTimeout = true) {
     const pageLode = document.getElementById('page-lode')
-    if (timeout && open) {
-        pageLode.style.display = ''
+    if (typeof openOrTimeout === 'number') {
         const lode = setTimeout(() => {
             pageLode.style.display = 'none'
             clearTimeout(lode)
-        }, timeout)
+        }, openOrTimeout)
+
         return
     }
-    pageLode.style.display = open ? '' : 'none'
+    pageLode.style.display = openOrTimeout ? '' : 'none'
 }
-
-function all() {
-    return arguments[0]
-}
-
 
 /**
  * 生成头像
@@ -28,8 +22,9 @@ function all() {
  */
 const createPortrait = ({ txt, color, size, fontSize, type, limit }) => {
     const [bgColor, fontColor] = color || []
-    const width = size?.[0] || 100
-    const height = size?.[1] || 100
+    const width = size?.[0] || 110
+    const height = size?.[1] || 110
+    fontSize = fontSize || 30
     if (!limit && txt.length !== 1) txt = txt.split('')[txt.length - 1]
     if (!limit && fontSize > width / 2) fontSize = width / 2
     const canvas = document.createElement('canvas')
@@ -39,8 +34,8 @@ const createPortrait = ({ txt, color, size, fontSize, type, limit }) => {
     /** 背景颜色 */
     ctx.fillStyle = bgColor || '#5b89fe'
     ctx.fillRect(0, 0, width, height)
-    // ctx.font = `bold  ${fontSize || 30}px Arial`
-    ctx.font = `${fontSize || 30}px Arial`
+    // ctx.font = `bold  ${fontSize}px Arial`
+    ctx.font = `${fontSize}px MiSans`
     /** 字体颜色 */
     ctx.fillStyle = fontColor || '#FFF'
     ctx.textAlign = 'center'

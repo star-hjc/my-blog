@@ -20,20 +20,18 @@
 </template>
 
 <script setup>
+import { useBlogStore } from '@/store'
+import { storeToRefs } from 'pinia'
+const { visits, visitsByDays } = storeToRefs(useBlogStore())
+
 const prop = defineProps({
-  runDays: {
-    type: Number,
-    default: 0
-  },
-  visitsByDays: {
-    type: Number,
-    default: 0
-  },
-  visits: {
-    type: Number,
-    default: 0
-  }
+    beginDays: {
+        type: String,
+        default: '2022-12-09'
+    }
 })
+
+const runDays = computed(() => (new Date() - new Date(prop.beginDays)) / (1000 * 60 * 60 * 24) | 0)
 </script>
 
 <style lang='scss' scoped>

@@ -3,17 +3,20 @@
         <!-- 头部 -->
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInDown"
             leave-active-class="animate__fadeOutUp" appear>
-            <TopBar v-show="isShowTopBar" :topBarBgColor="topBarBgColor" :events="{ onShowLoginBox,onShowRigthMenu }" />
+            <TopBar v-show="isShowTopBar" :topBarBgColor="topBarBgColor" />
         </transition>
         <!-- 主要内容 -->
-        <slot :toPageInside="toPageInside" :toPageInsideContent="toPageInsideContent" />
+        <slot />
         <!-- 底部 -->
         <FootBar />
     </el-scrollbar>
-    <!-- 登录 -->
-    <LoginModel ref="loginModelDOM" />
+    <!-- 登录模块 -->
+    <LoginModel />
+    <!-- 查询模块 -->
+    <SearchModal />
     <!-- 右侧菜单 -->
-    <RigthMenu ref="rigthMenuDOM" />
+    <RigthMenuModer />
+    <MyModel />
     <!-- 右下角菜单 -->
     <transition name="animate__animated animate__bounce" enter-active-class="animate__backInRight"
         leave-active-class="animate__backOutRight" appear>
@@ -24,47 +27,41 @@
 <script setup scoped>
 import TopBar from './TopBar.vue'
 import FootBar from './FootBar.vue'
-import RigthMenu from './RigthMenu.vue'
-import LoginModel from './LoginModel.vue'
+import MyModel from './modules/MyModel.vue'
+import LoginModel from './modules/LoginModel.vue'
+import SearchModal from './modules/SearchModal.vue'
+import RigthMenuModer from './modules/RigthMenuModer.vue'
 import { ref, provide, onMounted } from 'vue'
 import { useAppStore } from '@/store'
 const appStore = useAppStore()
 
 const topBarBgColor = ref('')
 const scrollbarDOM = ref(null)
-const loginModelDOM = ref(null)
-const rigthMenuDOM = ref(null)
 const isShowRigthside = ref(false)
 const isShowTopBar = ref(true)
 const scrollbarDOMisScrollTop = ref(0)
 
-defineExpose({ toPageInside, toPageInsideContent })
+const emits = defineEmits(['scroll'])
 
 provide('pageAnchor', { toPageInside })
 
+defineExpose({ toPageInsideContent })
+
 onMounted(() => {
     const { equipments, equipment } = appStore
+    /** 设备为手机取消滚动条 */
     if (equipments[equipment] === 1) {
         const vertical = scrollbarDOM.value.$el.querySelector('.el-scrollbar__bar.is-vertical')
         vertical.style.display = 'none'
     }
 })
 
-/** 登录页面显示控制 */
-function onShowLoginBox() {
-    loginModelDOM.value.onShowLoginBox()
-}
-
-/** 右侧菜单显示控制 */
-function onShowRigthMenu() {
-    rigthMenuDOM.value.onShowRigthMenu()
-}
-
 /**
  * 页面滚动
  * @param {Number} scrollTop 鼠标滚动距离
  */
-function onPageScroll({ scrollTop }) {
+function onPageScroll ({ scrollTop }) {
+    emits('scroll', scrollTop)
     /** 向下滚动距离 */
     const distance = scrollTop - scrollbarDOMisScrollTop.value
     /** 是否向下滚动 */
@@ -79,14 +76,15 @@ function onPageScroll({ scrollTop }) {
     isShowRigthside.value = scrollTop > 0
     /** 控制页面导航栏背景颜色 */
     topBarBgColor.value = isShowBlogPage ? 'rgba(0,0,0,0.3)' : ''
+    /** 右边列表超出可视区域 */
 }
 
 /**
  * 页面锚点跳转
  * @param {Object | Number} heightOrDom 高度 | Dom节点
- * @param {Object} params 
+ * @param {Object} params
  */
-function toPageInside(heightOrDom, params = {}) {
+function toPageInside (heightOrDom, params = {}) {
     const type = typeof (heightOrDom)
     if (type === 'object') {
         heightOrDom.scrollIntoView({ behavior: 'smooth', ...params })
@@ -103,7 +101,7 @@ function toPageInside(heightOrDom, params = {}) {
 /**
  * 页面滚动到内容部分
  */
-function toPageInsideContent(height = 0) {
+function toPageInsideContent (height = 0) {
     scrollbarDOMisScrollTop.value = height
     toPageInside(height)
 }
@@ -117,12 +115,21 @@ function toPageInsideContent(height = 0) {
     background: url('@/assets/img/bg/bg-all.jpg') 50%/cover no-repeat;
     background-color: #163549;
     background-attachment: fixed;
-    position: relative;
-    display: flex;
 }
 
-/** 设置滑块 */
-.el-scrollbar :deep(.el-scrollbar__bar.is-vertical) {
-    width: 8px;
+.el-scrollbar {
+
+    /** 设置滑块 */
+    :deep(.el-scrollbar__bar.is-vertical) {
+        width: 8px;
+    }
+
+    :deep(.el-scrollbar__view) {
+        position: relative;
+        min-height: 100%;
+        box-sizing: border-box;
+        padding-bottom: 145px;
+    }
+
 }
 </style>

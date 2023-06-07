@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref, reactive } from 'vue'
 const time = reactive({})
 const dayChat = ref({ 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' })
 
@@ -50,7 +50,7 @@ const getTimeinfo = () => {
     align-items: center;
 
     .time-year-mouth-date {
-        font-size: 1.1em;
+        font-size: 1.1rem;
         white-space: nowrap;
     }
 
@@ -58,8 +58,7 @@ const getTimeinfo = () => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: 3em;
-        margin-top: 10px;
+        font-size: 3rem;
     }
 
     .hr {

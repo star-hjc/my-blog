@@ -1,6 +1,7 @@
 /** axios封装 */
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { useAppStore } from '@/store'
 const { VITE_REQUIST_URL } = import.meta.env
 const axiosInstance = axios.create({
     baseURL: VITE_REQUIST_URL,
@@ -15,7 +16,7 @@ axiosInstance.interceptors.request.use(
         const Token = localStorage.getItem('TOKEN')
         if (Token) {
             config.headers = {
-                'token': Token,
+                'Authorization': `Bearer ${Token}`,
                 'Content-Type': 'application/json'
             }
         }
@@ -31,9 +32,12 @@ axiosInstance.interceptors.request.use(
  */
 axiosInstance.interceptors.response.use(
     response => {
-        return response
+        return response.data
     },
     error => {
+        if (error?.response?.data?.type === 1) {
+            useAppStore().onShowLoginModel()
+        }
         if (error && error.response) {
             const errMessage = {
                 0: '网络未连接，请检查网络状态...',
@@ -50,10 +54,10 @@ axiosInstance.interceptors.response.use(
                 504: '网络超时',
                 505: 'http版本不支持该请求'
             }
-            ElMessage.error(errMessage[error.response.status] || '连接错误')
+            ElMessage.error(error.response?.data?.message || errMessage[error.response.status] || '连接错误')
+            openLode(false)
         }
         return error
     }
 )
-
 export default axiosInstance

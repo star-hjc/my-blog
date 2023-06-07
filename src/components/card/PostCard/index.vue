@@ -1,71 +1,76 @@
 <template>
   <DefCard class="posts-card">
     <div class="post-info">
-      <a class="title space" href="#">{{ cardData.title }}</a>
+      <router-link class="title space" :to="`/articles/${item.blogId}`">{{ item.title }}</router-link>
 
       <div class="time-info">
         <div class="time">
           <el-icon class="iconfont icon-instruction" size="1.5rem" />
           <span>发布：</span>
-          <span>{{ cardData.releaseTime }}</span>
+          <span>{{ item.releaseTime }}</span>
         </div>
         <div class="time">
           <el-icon class="iconfont icon-clock update-date" size="1.5rem" />
           <span>更新：</span>
-          <span>{{ cardData.releaseTime }}</span>
+          <span>{{ item.updateTime }}</span>
         </div>
       </div>
-
       <div class="label">
-        <el-tag class="tag" v-for="item in cardData.label" type="info">{{ item }}</el-tag>
+        <el-tag class="tag" v-for="id in item.label" :key="id" type="info">{{ label(id) }}</el-tag>
       </div>
       <div class="label-mobile">
         <el-icon class="iconfont icon-agreement" size="1.5rem" color="var(--font-color)" />
-        <span> {{ cardData.label.join('•') }}</span>
+        <span> {{ item.label.map(v => label(v)).join('•') }}</span>
       </div>
 
       <div class="content space">
-        协议实现协议实现协议实现协议议实现协议实现实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现协议实现
+        {{ item.content }}
       </div>
 
       <div class="describe">
-
         <div class="user-info">
           <div class="portrait-box">
-            <img :src="cardData.portrait" @error="imgErr($event, true)">
+            <img :src="item.portrait || defPortrait" @error="imgErr($event, true)">
           </div>
-          <span>userInfo</span>
+          <span>{{ item.userName || '用户' }}</span>
         </div>
-
         <div class="describe-data">
           <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
-          <span>{{ new Date().getSeconds() }}</span>
+          <span>{{ item.watch || 0 }}</span>
           <el-icon class="iconfont icon-like" color="#F56C6C" size="1.5rem" />
-          <span>{{ new Date().getDate() }}</span>
+          <span>{{ item.likes || 0 }}</span>
         </div>
       </div>
     </div>
 
     <div class="post-img">
-      <img :src="cardData.postImg" @error="imgErr($event)">
+      <img :src="item.postImg || defImg" @error="imgErr($event)">
     </div>
   </DefCard>
 </template>
 
 <script setup>
+import { useBlogStore } from '@/store'
+const blogStore = useBlogStore()
+const { labels } = storeToRefs(blogStore)
+
+const defImg = new URL('../../../assets/img/def.jpg', import.meta.url).href
+const defPortrait = ref(createPortrait({ txt: '用户', limit: true }))
 defineProps({
-  cardData: {
-    type: Object,
-    required: true
-  }
+    item: {
+        type: Object,
+        required: true
+    }
+})
+
+const label = computed(() => {
+    return (id) => { return labels?.value?.find(v => v.id === id)?.name || '未知' }
 })
 
 const imgErr = (e, isPortrait) => {
-  const imgDOM = e.srcElement
-  const defImg = new URL('../../../assets/img/bg/bg-home.jpg', import.meta.url).href
-  const defPortrait = createPortrait({ txt: '用户', limit: true })
-  imgDOM.src = isPortrait ? defPortrait : defImg
-  imgDOM.onerror = null
+    const imgDOM = e.srcElement
+    imgDOM.src = isPortrait ? defPortrait : defImg
+    imgDOM.onerror = null
 }
 </script>
 
@@ -80,7 +85,7 @@ const imgErr = (e, isPortrait) => {
   box-sizing: border-box;
 
   .post-info {
-    min-width: 65%;
+    min-width: 62%;
 
     .title {
       width: 100%;
@@ -97,7 +102,7 @@ const imgErr = (e, isPortrait) => {
 
     .time-info {
       display: flex;
-      gap: 5px;
+      justify-content: space-between;
 
       .time {
         display: flex;
@@ -110,9 +115,8 @@ const imgErr = (e, isPortrait) => {
         }
       }
 
-
       i {
-        cursor: url('@/assets/img/cursor/common.cur'), auto;
+        cursor: url('@/assets/img/cursor/default.cur'), default;
       }
     }
 
@@ -127,6 +131,7 @@ const imgErr = (e, isPortrait) => {
       }
 
       span {
+        font-size: 0.8em;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -143,7 +148,7 @@ const imgErr = (e, isPortrait) => {
       gap: 5px;
 
       .tag {
-        cursor: url('@/assets/img/cursor/link-select.cur'), default;
+        cursor: url('@/assets/img/cursor/link-select.cur'), pointer;
       }
 
       .tag:hover {
@@ -173,7 +178,7 @@ const imgErr = (e, isPortrait) => {
       white-space: nowrap;
 
       .user-info {
-        cursor: url('@/assets/img/cursor/link-select.cur'), default;
+        cursor: url('@/assets/img/cursor/link-select.cur'), pointer;
         display: flex;
         align-items: center;
         gap: 20px;
@@ -197,18 +202,18 @@ const imgErr = (e, isPortrait) => {
         gap: 5px;
 
         .icon-eye_protection {
-          cursor: url('@/assets/img/cursor/common.cur'), auto;
+          cursor: url('@/assets/img/cursor/default.cur'), default;
         }
 
-        .icon-like:hover {
-          text-shadow: 1px 1px 5px var(--float-title-color)
+        .icon-mark:hover {
+          text-shadow: 0 0 5px red;
         }
       }
     }
   }
 
   .post-img {
-    width: 100%;
+    min-width: 35%;
     height: 80%;
     overflow: hidden;
     border-radius: 5px;
@@ -220,7 +225,7 @@ const imgErr = (e, isPortrait) => {
   }
 }
 
-@media (max-width:335px) {
+@media (max-width:355px) {
   .time-info {
     display: inline !important;
   }

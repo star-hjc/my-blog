@@ -1,28 +1,26 @@
 module.exports = {
     'env': {
         'browser': true,
+        'commonjs': true,
         'es2021': true,
         'node': true
     },
     'extends': [
         'eslint:recommended',
-        'plugin:vue/vue3-essential'
+        'plugin:vue/vue3-essential',
+        './.eslintrc-auto-import.json'
     ],
     'overrides': [
     ],
     'parserOptions': {
-        'ecmaVersion': 'latest',
-        'sourceType': 'module'
+        'ecmaVersion': 'latest'
     },
     'plugins': [
         'vue'
     ],
     'globals': {
-        'module': true,
-        'defineProps': true,
-        'defineEmits': true,
         'openLode': true,
-        'scrollbarLode': true
+        'createPortrait': true
     },
     'rules': {
         'vue/singleline-html-element-content-newline': 'off',
@@ -60,6 +58,16 @@ module.exports = {
         'indent': [2, 4, {
             'SwitchCase': 1
         }],
+        'quotes': [2, 'single', {
+            'avoidEscape': true,
+            'allowTemplateLiterals': true
+        }],
+        'no-unused-vars': [2, {
+            'vars': 'all',
+            'args': 'none'
+        }],
+        'no-console': 1,
+        'no-debugger': 1,
         'jsx-quotes': [2, 'prefer-single'],
         'key-spacing': [2, {
             'beforeColon': false,
@@ -145,10 +153,6 @@ module.exports = {
         }],
         'no-unreachable': 2,
         'no-unsafe-finally': 2,
-        'no-unused-vars': [2, {
-            'vars': 'all',
-            'args': 'none'
-        }],
         'no-useless-call': 2,
         'no-useless-computed-key': 2,
         'no-useless-constructor': 2,
@@ -165,17 +169,13 @@ module.exports = {
             }
         }],
         'padded-blocks': [2, 'never'],
-        'quotes': [2, 'single', {
-            'avoidEscape': true,
-            'allowTemplateLiterals': true
-        }],
         'semi': [2, 'never'],
         'semi-spacing': [2, {
             'before': false,
             'after': true
         }],
         'space-before-blocks': [2, 'always'],
-        'space-before-function-paren': [2,'never', {
+        'space-before-function-paren': [2, {
             'anonymous': 'always',
             'named': 'always',
             'asyncArrow': 'always'
@@ -196,8 +196,6 @@ module.exports = {
         'yield-star-spacing': [2, 'both'],
         'yoda': [2, 'never'],
         'prefer-const': 2,
-        'no-debugger': 0,
-        'no-console': 0,
         'object-curly-spacing': [2, 'always', {
             objectsInObjects: true
         }],

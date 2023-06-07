@@ -4,12 +4,13 @@
             <el-icon :class="['iconfont', themeIcon]" size="25px" />
         </div>
         <div class="nav" title="首页">
-            <el-icon class="iconfont icon-home" size="25px" @click="toPage(0)" />
+            <router-link to="/">
+                <el-icon class="iconfont icon-home" size="25px"/>
+            </router-link>
         </div>
         <div class="nav" title="设置">
             <a>
-                <el-icon class="iconfont icon-setting is-loading" size="25px"
-                    @click="ElMessage.warning('设置功能暂未开放...')" />
+                <el-icon class="iconfont icon-setting is-loading" size="25px" @click="ElMessage.warning('设置功能暂未开放...')" />
             </a>
         </div>
         <div class="nav" title="回到顶部">
@@ -22,22 +23,16 @@
 
 <script setup>
 import { ElMessage } from 'element-plus'
-import { ref, inject } from 'vue'
 import { useAppStore } from '@/store'
 
 const { toPageInside } = inject('pageAnchor')
 
 const appStore = useAppStore()
 
-/** 主题 */
-const theme = ref('dark')
-const themeIcon = ref('icon-brightness')
-
+const { theme, themeIcon } = storeToRefs(appStore)
 
 const onSwitchTheme = () => {
     appStore.toggleTheme()
-    theme.value = appStore.theme
-    themeIcon.value = appStore.themeIcon
 }
 
 const toPage = (value) => {

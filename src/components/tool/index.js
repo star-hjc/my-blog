@@ -5,7 +5,7 @@ import IconLayout from './IconLayout/index.vue'
 import NoticeScrol from './NoticeScrol/index.vue'
 
 export default {
-    install(app) {
+    install (app) {
         app.component({ TextSubtitle, NumFlop, RigthSide, IconLayout, NoticeScrol })
     }
 }
