@@ -12,19 +12,20 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import lottie from "lottie-web";
-import * as anData from "@/assets/lottie/404.json";
-let animation = {};
+import { onMounted } from 'vue'
+import lottie from 'lottie-web'
+import { ref } from 'vue'
+import * as anData from '@/assets/lottie/404.json'
+const animation = ref({})
 onMounted(() => {
-  animation = lottie.loadAnimation({
-    container: document.getElementById("lottie_box"), //当前需要渲染的DOM
-    renderer: "svg", //渲染方式，默认为svg,还可以渲染为html和canvas
-    loop: true, //循环播放
-    autoplay: true, //自动播放
-    animationData: anData.default, //本地动画
-  });
-});
+    animation.value = lottie.loadAnimation({
+        container: document.getElementById('lottie_box'), // 当前需要渲染的DOM
+        renderer: 'svg', // 渲染方式，默认为svg,还可以渲染为html和canvas
+        loop: true, // 循环播放
+        autoplay: true, // 自动播放
+        animationData: anData.default // 本地动画
+    })
+})
 </script>
 
 <style scoped>

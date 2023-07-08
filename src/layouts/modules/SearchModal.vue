@@ -5,14 +5,18 @@
       <div class="search-box">
         <el-input v-model="searchVal" class="search-input" size="large" placeholder="请输入文章标题或内容..."
           @keyup.enter="onSearch">
-          <template #prefix>
-            <el-icon class="iconfont icon-search" @click="onSearch" />
-          </template>
+          <!-- <template #prefix>
+            <el-icon style="text-align: center;" class="iconfont icon-search" @click="onSearch" />
+          </template> -->
         </el-input>
+        <el-button @click="onSearch" style="height: auto;width: 45px; border-radius: 0px 30px 30px 0px;" :icon="Search"
+          class="iconfont icon-search " circle />
       </div>
       <el-divider border-style="dashed" />
       <el-scrollbar class="search-wrap" :height="'var(--search-wrap-height)'">
-        <div class="content-wrap">
+        <div class="content-wrap" @click="showshoweldialog">
+          <p class="search-word" v-if="state.bolgList?.length === 0">搜索内容为空</p>
+          <p class="search-word" v-if="state.bolgList === null">请输入搜索的内容</p>
           <router-link class="search-item" v-for="item in state.bolgList" :key="item.blogId"
             :to="`/articles/${item.blogId}`">
             <span class="title">{{ item.title }}</span>
@@ -35,7 +39,10 @@ const state = reactive({
 })
 
 const { isShowSearchModel } = storeToRefs(appStore)
-
+// 点击搜索到的内容关闭弹窗
+const showshoweldialog = () => {
+    isShowSearchModel.value = false
+}
 const searchVal = ref('')
 
 async function onSearch () {
@@ -64,6 +71,8 @@ async function onSearch () {
 
   .search-wrap {
     overflow-x: hidden;
+    display: flex;
+    justify-content: center;
 
     .content-wrap {
       display: flex;
@@ -106,6 +115,10 @@ async function onSearch () {
       }
     }
 
+    .search-word {
+      font-size: 14px;
+    }
+
     .search-item::before {
       content: '';
       position: absolute;
@@ -128,6 +141,8 @@ async function onSearch () {
   /** 搜索框改圆角 */
   & :deep(.el-input__wrapper) {
     --el-input-border-radius: var(--el-component-size-large);
+    // --el-input-border-radius: var(--el-component-size-large);
+    --el-input-border-radius: 30px 0px 0px 30px;
   }
 
   /** 修改分割线大小 */
