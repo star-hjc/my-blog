@@ -5,7 +5,7 @@ export default defineStore({
     id: 'blog',
     state: () => {
         return {
-            notice: ['待更新公告...'],
+            notice: ['待开发者更新公告...'],
             /** 标签 */
             labels: [],
             blogNum: 0,
