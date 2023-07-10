@@ -1,8 +1,8 @@
 <template>
+  <router-link class="title space" :to="`/articles/${item.blogId}`">
   <DefCard class="posts-card">
     <div class="post-info">
-      <router-link class="title space" :to="`/articles/${item.blogId}`">{{ item.title }}</router-link>
-
+      <p>{{ item.title }}</p>
       <div class="time-info">
         <div class="time">
           <el-icon class="iconfont icon-instruction" size="1.5rem" />
@@ -47,6 +47,7 @@
       <img :src="item.postImg || defImg" @error="imgErr($event)">
     </div>
   </DefCard>
+</router-link>
 </template>
 
 <script setup>
@@ -75,6 +76,18 @@ const imgErr = (e, isPortrait) => {
 </script>
 
 <style lang='scss' scoped>
+  .title {
+      width: 100%;
+      color: var(--font-color);
+      display: inline-block;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .title:hover {
+      // color: var(--float-title-color);
+      transition: color .5s;
+    }
 .posts-card {
   display: flex;
   flex-direction: row;
@@ -86,19 +99,6 @@ const imgErr = (e, isPortrait) => {
 
   .post-info {
     min-width: 62%;
-
-    .title {
-      width: 100%;
-      color: var(--font-color);
-      display: inline-block;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-
-    .title:hover {
-      color: var(--float-title-color);
-      transition: color .5s;
-    }
 
     .time-info {
       display: flex;

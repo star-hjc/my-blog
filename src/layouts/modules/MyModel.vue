@@ -15,58 +15,17 @@
           <span class="user-detail">{{ 1 }} 粉丝 {{ 1 }} 关注 {{ 1 }} 获赞</span>
         </div>
       </div>
-      <div class="content">
-        <el-container style="height: 400px">
-          <el-aside width="200px">
-            <el-scrollbar>
-              <el-menu default-active="2">
-                <el-sub-menu index="1">
-                  <template #title>
-                    <el-icon>
-                      <location />
-                    </el-icon>
-                    <span>Navigator One</span>
-                  </template>
-                  <el-menu-item-group title="Group One">
-                    <el-menu-item index="1-1">item one</el-menu-item>
-                    <el-menu-item index="1-2">item two</el-menu-item>
-                  </el-menu-item-group>
-                  <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                  </el-menu-item-group>
-                  <el-sub-menu index="1-4">
-                    <template #title>item four</template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                  </el-sub-menu>
-                </el-sub-menu>
-                <el-menu-item index="2">
-                  <el-icon><icon-menu /></el-icon>
-                  <span>Navigator Two</span>
-                </el-menu-item>
-                <el-menu-item index="3" disabled>
-                  <el-icon>
-                    <document />
-                  </el-icon>
-                  <span>Navigator Three</span>
-                </el-menu-item>
-                <el-menu-item index="4">
-                  <el-icon>
-                    <setting />
-                  </el-icon>
-                  <span>Navigator Four</span>
-                </el-menu-item>
-              </el-menu>
-            </el-scrollbar>
-          </el-aside>
-          <el-main>Main</el-main>
-        </el-container>
-
-      </div>
+      <!-- 列表 -->
+        <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
+        <el-tab-pane label="我的收藏">我的收藏</el-tab-pane>
+        <el-tab-pane label="浏览历史">浏览历史</el-tab-pane>
+      </el-tabs>
     </el-dialog>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useAppStore, useUserStore } from '@/store'
 const appStore = useAppStore()
 const userStore = useUserStore()
@@ -75,6 +34,7 @@ const { portrait, code, userName } = storeToRefs(userStore)
 
 const dialogDOM = ref(null)
 
+const tabPosition = ref('left')
 onMounted(() => {
 })
 
@@ -97,9 +57,9 @@ function close () {
       padding-top: 15px;
 
       .el-menu {
-        --el-menu-hover-bg-color:var(--float-color-bg);
+        --el-menu-hover-bg-color: var(--float-color-bg);
         --el-menu-border-color: transparent;
-        --el-menu-bg-color: var( --global-bg);
+        --el-menu-bg-color: var(--global-bg);
         --el-menu-text-color: var(--font-color)
       }
     }
@@ -189,5 +149,17 @@ function close () {
     }
 
   }
+}
+
+.demo-tabs>.el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.el-tabs--right .el-tabs__content,
+.el-tabs--left .el-tabs__content {
+  height: 100%;
 }
 </style>
