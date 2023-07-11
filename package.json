@@ -27,6 +27,7 @@
     "lottie-web": "^5.10.2",
     "md-editor-v3": "^2.8.0",
     "md5": "^2.3.0",
+    "mockjs": "^1.1.0",
     "pinia": "^2.0.18",
     "vanilla-tilt": "^1.7.2",
     "vue": "^3.2.37",
@@ -42,6 +43,7 @@
     "sass-loader": "^13.0.2",
     "unplugin-auto-import": "^0.11.1",
     "unplugin-vue-components": "^0.22.4",
-    "vite": "^3.0.7"
+    "vite": "^3.0.7",
+    "vite-plugin-mock": "2.9.6"
   }
 }

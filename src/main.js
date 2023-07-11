@@ -21,11 +21,11 @@ import 'element-plus/es/components/message-box/style/css'
 import 'md-editor-v3/lib/style.css'
 
 /** 自定义组件 */
-import myCustomComponents from './components'
+import initComponents from './components'
 
 const app = createApp(App)
 /** 自定义组件注册 */
-myCustomComponents.install(app)
+initComponents.install(app)
 /** 路由 - VueRouter */
 app.use(router)
 /** 自定义指令 */

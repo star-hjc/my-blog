@@ -23,6 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 *.lock
+./package-lock.json
 
 # bulid View
 stats.html
+
