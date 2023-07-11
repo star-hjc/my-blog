@@ -16,9 +16,20 @@
         </div>
       </div>
       <!-- 列表 -->
-        <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
-        <el-tab-pane label="我的收藏">我的收藏</el-tab-pane>
-        <el-tab-pane label="浏览历史">浏览历史</el-tab-pane>
+      <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
+        <el-tab-pane label="我的收藏">
+          <el-scrollbar height="400px">
+            <CollectCard  v-for="item in state.bolgList" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"></CollectCard>
+          </el-scrollbar>
+        </el-tab-pane>
+        <el-tab-pane label="浏览历史">
+          <div class="historylist">
+            <el-scrollbar height="400px">
+              <PostCard v-for="item in state.bolgList" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"/>
+            </el-scrollbar>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="我的文章">我的文章</el-tab-pane>
       </el-tabs>
     </el-dialog>
   </div>
@@ -27,6 +38,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAppStore, useUserStore } from '@/store'
+import { getBolgList } from '@/api/blog'
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { isShowMyModel } = storeToRefs(appStore)
@@ -35,7 +47,14 @@ const { portrait, code, userName } = storeToRefs(userStore)
 const dialogDOM = ref(null)
 
 const tabPosition = ref('left')
-onMounted(() => {
+
+const state = reactive({
+    bolgList: []
+})
+onMounted(async () => {
+    getBolgList().then(({ data }) => {
+        state.bolgList = data
+    })
 })
 
 function close () {
@@ -52,6 +71,21 @@ function close () {
     border-radius: 5px;
     background: var(--global-bg);
     width: var(--model-width);
+
+    .historylist {
+      padding: 20px;
+      width: auto;
+      margin-bottom: 100px;
+
+      .el-scrollbar__view:last-child {
+        margin-bottom: 20px;
+      }
+
+      .posts-card {
+        margin: 10px 10px;
+        padding: 20px;
+      }
+    }
 
     .content {
       padding-top: 15px;
@@ -161,5 +195,4 @@ function close () {
 .el-tabs--right .el-tabs__content,
 .el-tabs--left .el-tabs__content {
   height: 100%;
-}
-</style>
+}</style>

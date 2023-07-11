@@ -23,7 +23,7 @@
                     <template #dropdown>
                         <el-dropdown-item>
                             <IconLayout :iconClass="`iconfont icon-nickname`" size="1rem">
-                                <span @click="appStore.onShowMyModel()">个人信息</span>
+                                <span v-loading.fullscreen.lock="fullscreenLoading" @click="appStore.onShowMyModel()">个人信息</span>
                             </IconLayout>
                         </el-dropdown-item>
                         <!-- <el-dropdown-item>
@@ -46,9 +46,9 @@
 <script setup>
 import { useAppStore, useUserStore } from '@/store'
 import { onMounted } from 'vue'
-
 const appStore = useAppStore()
 const userStore = useUserStore()
+const fullscreenLoading = ref(false) // 个人信息卡顿加载动画
 
 defineProps({
     topBarBgColor: {
@@ -88,7 +88,6 @@ function onSignOut () {
     localStorage.removeItem('TOKEN')
     userStore.$reset()
 }
-
 </script>
 
 <style lang="scss" scoped>

@@ -15,7 +15,6 @@
         <el-icon class="iconfont icon-down" size="35px" @click="onToPageInsideContent" />
       </a>
     </MainTopBar>
-
     <MainContentBar class="main-content">
       <!-- 博客列表 -->
       <template #posts>
@@ -68,7 +67,6 @@ import { getBolgList } from '@/api/blog'
 import { onMounted } from 'vue'
 // import { useRouter } from 'vue-router';
 const blogStore = useBlogStore()
-
 const mainTopBarDOM = ref(null)
 const pageFrameDOM = ref(null)
 
