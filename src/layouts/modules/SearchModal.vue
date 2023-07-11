@@ -9,7 +9,7 @@
             <el-icon style="text-align: center;" class="iconfont icon-search" @click="onSearch" />
           </template> -->
         </el-input>
-        <el-button @click="onSearch" style="height: auto;width: 45px; border-radius: 0px 30px 30px 0px;" :icon="Search"
+        <el-button @click="onSearch" style="height: auto;width: 45px; border-radius: 0px 30px 30px 0px;" icon="Search"
           class="iconfont icon-search " circle />
       </div>
       <el-divider border-style="dashed" />
