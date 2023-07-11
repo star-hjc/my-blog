@@ -5,7 +5,7 @@ import PostCard from './PostCard/index.vue'
 import DefCard from './DefCard/index.vue'
 import RunLogCard from './RunLogCard/index.vue'
 import UserCard from './UserCard/index.vue'
-
+import CollectCard from './CollectCard/index.vue'
 export default {
     install (app) {
         app.component({
@@ -15,7 +15,8 @@ export default {
             PostCard,
             DefCard,
             UserCard,
-            RunLogCard
+            RunLogCard,
+            CollectCard
         })
     }
 }
