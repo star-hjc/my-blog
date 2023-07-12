@@ -61,10 +61,12 @@
 import PageFrame from '@/layouts/PageFrame.vue'
 import MainTopBar from '@/layouts/MainTopBar.vue'
 import MainContentBar from '@/layouts/MainContentBar.vue'
+import { useAppStore } from '@/store'
 import { useBlogStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { getBolgList } from '@/api/blog'
 import { onMounted } from 'vue'
+const appStore = useAppStore()
 // import { useRouter } from 'vue-router';
 const blogStore = useBlogStore()
 const mainTopBarDOM = ref(null)
@@ -77,11 +79,20 @@ const state = reactive({
 })
 
 onMounted(async () => {
+    fistview()
     getBolgList().then(({ data }) => {
         state.bolgList = data
     })
 })
-
+// 頁面模式存儲
+function fistview () {
+    const htmlDOM = document.documentElement
+    const theme = localStorage.getItem('theme')
+    const themeIcon = localStorage.getItem('themeIcon')
+    appStore.theme = theme
+    appStore.themeIcon = themeIcon
+    htmlDOM.setAttribute('data-theme', theme)
+}
 const homeIconBox = ref([
     { id: 0, icon: 'icon-QQ', title: 'QQ', content: '59476905' },
     { id: 1, icon: 'icon-wechat-fill', title: '微信', content: 'hjc59476905' },
