@@ -1,3 +1,4 @@
+<!-- eslint-disable no-undef -->
 <template>
   <div class="icon-layout">
     <el-icon :size="size" :color="color" :class="iconClass" :style="iconStyle"/>
@@ -7,7 +8,7 @@
 </template>
 
 <script setup>
-defineOptions({ name: 'IconLayout' })
+// defineOptions({ name: 'IconLayout' })
 defineProps({
     iconClass: {
         type: String,

@@ -66,12 +66,13 @@ function close () {
 .my-model {
   --model-width: 960px;
   --model-min-width: 230px;
-
   :deep(.el-dialog) {
     border-radius: 5px;
     background: var(--global-bg);
     width: var(--model-width);
-
+    .posts-card {
+      height: 287px;
+    }
     .historylist {
       padding: 20px;
       width: auto;
