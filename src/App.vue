@@ -17,6 +17,8 @@ const blogStore = useBlogStore()
 const locale = ref(zhCn)
 
 onMounted(async () => {
+    /** 持久主题缓存判断 */
+    if (localStorage.getItem('theme') === 'light') appStore.toggleTheme()
     appStore.setData({
         /** 获取设备 */
         equipment: device.type,

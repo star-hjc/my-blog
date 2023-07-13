@@ -66,15 +66,16 @@ export default defineStore({
         },
         toggleTheme () {
             const htmlDOM = document.documentElement
-            if (htmlDOM.getAttribute('data-theme') === 'light') {
+            if (htmlDOM.getAttribute('data-theme')) {
                 this.theme = 'dark'
                 this.themeIcon = 'icon-brightness'
                 htmlDOM.removeAttribute('data-theme')
-                return
+            } else {
+                this.theme = 'light'
+                this.themeIcon = 'icon-DND_mode'
+                htmlDOM.setAttribute('data-theme', 'light')
             }
-            this.theme = 'light'
-            this.themeIcon = 'icon-DND_mode'
-            htmlDOM.setAttribute('data-theme', 'light')
+            localStorage.setItem('theme', this.theme)
         }
     },
     getters: {
