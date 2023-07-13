@@ -61,10 +61,11 @@ defineProps({
 const navData = reactive([
     { id: 0, icon: 'icon-search', txt: '搜索', path: '', event: 'search', equipment: 0 },
     { id: 1, icon: 'icon-home', txt: '首页', path: '/index', event: '', equipment: 2 },
-    { id: 2, icon: 'icon-agreement', txt: '标签', path: '/tag', event: '', equipment: 2 },
-    { id: 3, icon: 'icon-mirrorlightctrl', txt: '类别', path: '/category', event: '', equipment: 2 },
-    { id: 4, icon: 'icon-suggestion', txt: '归档', path: '/archive', event: '', equipment: 2 },
-    { id: 5, icon: 'icon-menu', txt: '菜单', path: '', event: 'menu', equipment: 1 }
+    { id: 2, icon: 'icon-message', txt: '聊天室', path: '/mgs', event: '', equipment: 2 },
+    { id: 3, icon: 'icon-agreement', txt: '标签', path: '/tag', event: '', equipment: 2 },
+    { id: 4, icon: 'icon-mirrorlightctrl', txt: '类别', path: '/category', event: '', equipment: 2 },
+    { id: 5, icon: 'icon-suggestion', txt: '归档', path: '/archive', event: '', equipment: 2 },
+    { id: 6, icon: 'icon-menu', txt: '菜单', path: '', event: 'menu', equipment: 1 }
 ])
 
 onMounted(() => {
