@@ -66,7 +66,7 @@ export default defineStore({
         },
         toggleTheme () {
             const htmlDOM = document.documentElement
-            if (htmlDOM.getAttribute('data-theme')) {
+            if (htmlDOM.getAttribute('data-theme') === 'light') {
                 this.theme = 'dark'
                 this.themeIcon = 'icon-brightness'
                 htmlDOM.removeAttribute('data-theme')
