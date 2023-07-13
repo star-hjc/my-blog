@@ -1,6 +1,8 @@
 {
   "globals": {
     "EffectScope": true,
+    "ElMessage": true,
+    "ElMessageBox": true,
     "acceptHMRUpdate": true,
     "computed": true,
     "createApp": true,
@@ -62,8 +64,6 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "ElMessageBox": true,
-    "ElMessage": true
+    "watchSyncEffect": true
   }
 }

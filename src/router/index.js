@@ -67,6 +67,11 @@ const router = createRouter({
             path: '/archive',
             name: 'archive',
             component: () => import('@/views/archive/ArchivePage.vue')
+        },
+        {
+            path: '/mgs',
+            name: 'mgs',
+            component: () => import('@/views/mgs/MessageRoot.vue')
         }
     ]
 })
