@@ -33,8 +33,6 @@ const { theme, themeIcon } = storeToRefs(appStore)
 
 const onSwitchTheme = () => {
     appStore.toggleTheme()
-    localStorage.setItem('theme', appStore.theme)
-    localStorage.setItem('themeIcon', appStore.themeIcon)
 }
 
 const toPage = (value) => {
