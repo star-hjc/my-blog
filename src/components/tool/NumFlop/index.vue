@@ -29,7 +29,7 @@ onMounted(() => {
     digital(props.time, props.delays, props.num + '')
 })
 /**
- * 
+ *
  * @param {Number} time 每次计数的延迟（毫秒）
  * @param {Number} delays 计数动画的总持续时间
  */
@@ -47,7 +47,7 @@ const digital = async (time = 100, delays = 2000, num) => {
 
     for (let i = 1; i <= divisions; i++) {
         if (i) await delay(time)
-        let newNum = parseFloat(num / divisions * i).toFixed(decimalPlaces);
+        let newNum = parseFloat(num / divisions * i).toFixed(decimalPlaces)
 
         if (isComma && newNum.length > 3) {
             while (/(\d+)(\d{3})/.test(newNum)) {
@@ -56,7 +56,7 @@ const digital = async (time = 100, delays = 2000, num) => {
         }
 
         if (isTime) {
-            newNum = parseInt(ss / divisions * i);
+            newNum = parseInt(ss / divisions * i)
             const hours = (parseInt(newNum / 3600) % 24 + '').padStart(2, 0)
             const minutes = (parseInt(newNum / 60) % 60 + '').padStart(2, 0)
             const seconds = (parseInt(newNum % 60, 10) + '').padStart(2, 0)

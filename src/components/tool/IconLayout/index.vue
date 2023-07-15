@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-// defineOptions({ name: 'IconLayout' })
+defineOptions({ name: 'IconLayout' })
 defineProps({
     iconClass: {
         type: String,

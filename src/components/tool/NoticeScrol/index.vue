@@ -18,6 +18,7 @@ const prop = defineProps({
         default: 0.5,
         validator (value) {
             const bool = value <= 1 && value >= 0
+            // eslint-disable-next-line no-console
             if (!bool) console.warn('speed值应大于0小于1')
             return bool
         }

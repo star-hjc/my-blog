@@ -35,10 +35,12 @@
           <span>{{ item.userName || '用户' }}</span>
         </div>
         <div class="describe-data">
-          <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
-          <span>{{ item.watch || 0 }}</span>
+          <el-icon class="iconfont icon-mark" color="#f7cb49" size="1.5rem" />
+          <span>{{ item.likes || 0 }}</span>
           <el-icon class="iconfont icon-like" color="#F56C6C" size="1.5rem" />
           <span>{{ item.likes || 0 }}</span>
+          <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
+          <span>{{ item.watch || 0 }}</span>
         </div>
       </div>
     </div>
@@ -206,7 +208,10 @@ const imgErr = (e, isPortrait) => {
         }
 
         .icon-mark:hover {
-          text-shadow: 0 0 5px red;
+          text-shadow: 0 0 5px #FFCA28;
+        }
+        .icon-like:hover {
+          text-shadow: 0 0 5px #FF0000;
         }
       }
     }
