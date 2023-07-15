@@ -47,3 +47,20 @@ export const setBolgDetails = (data) => {
         data
     })
 }
+// 添加收藏
+export const starBlog = (blogId) => {
+    return requst({
+        url: `/api/blog/star`,
+        method: 'post',
+        data: { blogId }
+    })
+}
+// 点赞
+export const likeBlog = (blogId, num) => {
+    return requst({
+        url: `/api/blog/like`,
+        method: 'post',
+        data: { blogId, num }
+    })
+}
+// 添加博客
