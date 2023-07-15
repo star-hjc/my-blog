@@ -36,8 +36,8 @@
         </div>
         <div class="describe-data">
           <el-icon class="iconfont icon-mark" color="#f7cb49" size="1.5rem" />
-          <span>{{ item.likes || 0 }}</span>
-          <el-icon class="iconfont icon-like" color="#F56C6C" size="1.5rem" />
+          <span>{{ item.stars || 0 }}</span>
+          <el-icon class="iconfont icon-like" @click.stop="onLike" color="#F56C6C" size="1.5rem" />
           <span>{{ item.likes || 0 }}</span>
           <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
           <span>{{ item.watch || 0 }}</span>
@@ -54,12 +54,13 @@
 
 <script setup>
 import { useBlogStore } from '@/store'
+import { starBlog } from '@/api/blog'
 const blogStore = useBlogStore()
 const { labels } = storeToRefs(blogStore)
 
 const defImg = new URL('../../../assets/img/def.jpg', import.meta.url).href
 const defPortrait = ref(createPortrait({ txt: '用户', limit: true }))
-defineProps({
+const props = defineProps({
     item: {
         type: Object,
         required: true
@@ -74,6 +75,10 @@ const imgErr = (e, isPortrait) => {
     const imgDOM = e.srcElement
     imgDOM.src = isPortrait ? defPortrait : defImg
     imgDOM.onerror = null
+}
+
+const onLike = async () => {
+    await starBlog(props.item.blogId)
 }
 </script>
 
