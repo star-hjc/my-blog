@@ -29,14 +29,12 @@
     </div>
 </template>
 
-
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { getIPInfo, getWeatherByCounty, getWeatherAddress } from '@/api/public'
 import { weathersIcon, direction } from './weathersStaticData.js'
 
-let address = ref('')
-
+const address = ref('')
 
 const vData = reactive({
     weatherData: {
@@ -51,7 +49,7 @@ const vData = reactive({
         /** 风向 1：东北 */
         wind_direction: '',
         /** 风速等级 */
-        wind_power: '',
+        wind_power: ''
     }
 })
 
@@ -96,7 +94,6 @@ onMounted(() => {
         border-top: 1px solid #FFF;
         display: flex;
         justify-content: space-around;
-
 
         .weather-icon {
             position: relative;

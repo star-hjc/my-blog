@@ -1,60 +1,61 @@
 <template>
   <router-link class="title space" :to="`/articles/${item.blogId}`">
-  <DefCard class="posts-card">
-    <div class="post-info">
-      <p>{{ item.title }}</p>
-      <div class="time-info">
-        <div class="time">
-          <el-icon class="iconfont icon-instruction" size="1.5rem" />
-          <span>发布：</span>
-          <span>{{ item.releaseTime }}</span>
-        </div>
-        <div class="time">
-          <el-icon class="iconfont icon-clock update-date" size="1.5rem" />
-          <span>更新：</span>
-          <span>{{ item.updateTime }}</span>
-        </div>
-      </div>
-      <div class="label">
-        <el-tag class="tag" v-for="id in item.label" :key="id" type="info">{{ label(id) }}</el-tag>
-      </div>
-      <div class="label-mobile">
-        <el-icon class="iconfont icon-agreement" size="1.5rem" color="var(--font-color)" />
-        <span> {{ item.label.map(v => label(v)).join('•') }}</span>
-      </div>
-
-      <div class="content space">
-        {{ item.content }}
-      </div>
-
-      <div class="describe">
-        <div class="user-info">
-          <div class="portrait-box">
-            <img :src="item.portrait || defPortrait" @error="imgErr($event, true)">
+    <DefCard class="posts-card">
+      <div class="post-info">
+        <p>{{ item.title }}</p>
+        <div class="time-info">
+          <div class="time">
+            <el-icon class="iconfont icon-instruction" size="1.5rem" />
+            <span>发布：</span>
+            <span>{{ item.releaseTime }}</span>
           </div>
-          <span>{{ item.userName || '用户' }}</span>
+          <div class="time">
+            <el-icon class="iconfont icon-clock update-date" size="1.5rem" />
+            <span>更新：</span>
+            <span>{{ item.updateTime }}</span>
+          </div>
         </div>
-        <div class="describe-data">
-          <el-icon class="iconfont icon-mark" color="#f7cb49" size="1.5rem" />
-          <span>{{ item.stars || 0 }}</span>
-          <el-icon class="iconfont icon-like" @click.stop="onLike" color="#F56C6C" size="1.5rem" />
-          <span>{{ item.likes || 0 }}</span>
-          <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
-          <span>{{ item.watch || 0 }}</span>
+        <div class="label">
+          <el-tag class="tag" v-for="id in item.label" :key="id" type="info">{{ label(id) }}</el-tag>
+        </div>
+        <div class="label-mobile">
+          <el-icon class="iconfont icon-agreement" size="1.5rem" color="var(--font-color)" />
+          <span> {{ item.label.map(v => label(v)).join('•') }}</span>
+        </div>
+
+        <div class="content space">
+          {{ item.content }}
+        </div>
+
+        <div class="describe">
+          <div class="user-info">
+            <div class="portrait-box">
+              <img :src="item.portrait || defPortrait" @error="imgErr($event, true)">
+            </div>
+            <span>{{ item.userName || '用户' }}</span>
+          </div>
+          <div class="describe-data">
+            <el-icon class="iconfont icon-mark" @click.prevent="onStar" color="#f7cb49" size="1.5rem" />
+            <span>{{ item.stars || 0 }}</span>
+            <el-icon class="iconfont icon-like" @click.prevent="onLike" color="#F56C6C" size="1.5rem" />
+            <span>{{ item.likes || 0 }}</span>
+            <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
+            <span>{{ item.watch || 0 }}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="post-img">
-      <img :src="item.postImg || defImg" @error="imgErr($event)">
-    </div>
-  </DefCard>
-</router-link>
+      <div class="post-img">
+        <img :src="item.postImg || defImg" @error="imgErr($event)">
+      </div>
+    </DefCard>
+  </router-link>
 </template>
 
 <script setup>
 import { useBlogStore } from '@/store'
-import { starBlog } from '@/api/blog'
+import { starBlog, likeBlog } from '@/api/blog'
+import { throttle } from '@/utils/utils.js'
 const blogStore = useBlogStore()
 const { labels } = storeToRefs(blogStore)
 
@@ -77,24 +78,31 @@ const imgErr = (e, isPortrait) => {
     imgDOM.onerror = null
 }
 
-const onLike = async () => {
+const onStar = async () => {
     await starBlog(props.item.blogId)
+}
+// 喜欢  我不会你这个节流函数你来吧
+var num = ref(props.item.likes)
+const onLike = async () => {
+    num.value++
+    await throttle(likeBlog(props.item.blogId, num.value))
 }
 </script>
 
 <style lang='scss' scoped>
-  .title {
-      width: 100%;
-      color: var(--font-color);
-      display: inline-block;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
+.title {
+  width: 100%;
+  color: var(--font-color);
+  display: inline-block;
+  font-size: 1.2em;
+  font-weight: bold;
+}
 
-    .title:hover {
-      // color: var(--float-title-color);
-      transition: color .5s;
-    }
+.title:hover {
+  // color: var(--float-title-color);
+  transition: color .5s;
+}
+
 .posts-card {
   display: flex;
   flex-direction: row;
@@ -215,6 +223,7 @@ const onLike = async () => {
         .icon-mark:hover {
           text-shadow: 0 0 5px #FFCA28;
         }
+
         .icon-like:hover {
           text-shadow: 0 0 5px #FF0000;
         }
