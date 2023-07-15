@@ -42,7 +42,6 @@ export const getAirQualityByCity = (province, city) => {
     })
 }
 
-
 /**
  *
  * @param {String} province 省份
@@ -57,13 +56,12 @@ export const getWeatherAddress = (address) => {
     })
 }
 
-
 /**
- * 
+ *
  * @returns 获取禅语
  */
-export const getSaying = () =>{
+export const getSaying = () => {
     return requst({
-        url: `https://v1.hitokoto.cn/`,
+        url: `https://v1.hitokoto.cn/`
     })
 }
