@@ -19,7 +19,7 @@
       <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
         <el-tab-pane label="我的喜欢">
           <el-scrollbar height="400px">
-            <CollectCard  v-for="item in state.bolgList" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"></CollectCard>
+            <CollectCard  v-for="item in lovelist" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"></CollectCard>
           </el-scrollbar>
         </el-tab-pane>
         <el-tab-pane label="浏览历史">
@@ -38,7 +38,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAppStore, useUserStore } from '@/store'
-import { getBolgList } from '@/api/blog'
+import { getBolgList, getloveBlog } from '@/api/blog'
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { isShowMyModel } = storeToRefs(appStore)
@@ -55,8 +55,13 @@ onMounted(async () => {
     getBolgList().then(({ data }) => {
         state.bolgList = data
     })
+    getmylove()
 })
-
+const lovelist = ref([])
+const getmylove = async () => {
+    const res = await getloveBlog()
+    lovelist.value = res.data
+}
 function close () {
     dialogDOM.value.visible = false
 }
