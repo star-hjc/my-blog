@@ -17,7 +17,7 @@
       </div>
       <!-- 列表 -->
       <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
-        <el-tab-pane label="我的收藏">
+        <el-tab-pane label="我的喜欢">
           <el-scrollbar height="400px">
             <CollectCard  v-for="item in state.bolgList" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"></CollectCard>
           </el-scrollbar>
