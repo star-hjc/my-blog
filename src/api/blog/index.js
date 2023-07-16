@@ -77,6 +77,20 @@ export const getstarBlog = () => {
         method: 'get'
     })
 }
+
+/**
+ * 根据博客ID、Token的用户ID获取受否收藏或喜欢
+ * @param {String} blogId
+ * @returns {{star:Boolean,like:boolean}}
+ */
+export const getStarAndLike = (blogId) => {
+    return requst({
+        url: `/api/blog/isStarAndLike`,
+        method: 'get',
+        params: { blogId }
+    })
+}
+
 // 获取浏览历史列表
 // export const historyBlog = (blogId) => {
 //     return requst({
