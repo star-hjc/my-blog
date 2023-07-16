@@ -19,13 +19,29 @@
       <el-tabs :tab-position="tabPosition" style="height: 400px" class="demo-tabs">
         <el-tab-pane label="我的喜欢">
           <el-scrollbar height="400px">
-            <CollectCard  v-for="item in lovelist" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"></CollectCard>
+            <CollectCard v-for="item in lovelist" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()">
+              <div>
+                <el-icon class="iconfont icon-like" color="#F56C6C" size="1.5rem" />
+                <span style="font-size: 1.2rem;">{{ item.likes || 0 }}</span>
+              </div>
+            </CollectCard>
+          </el-scrollbar>
+        </el-tab-pane>
+        <el-tab-pane label="我的收藏">
+          <el-scrollbar height="400px">
+            <CollectCard v-for="item in starlist" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()">
+              <div>
+                <el-icon class="iconfont icon-mark" color="#f7cb49" size="1.5rem" />
+                <span style="font-size: 1.2rem;">{{ item.stars || 0 }}</span>
+              </div>
+            </CollectCard>
           </el-scrollbar>
         </el-tab-pane>
         <el-tab-pane label="浏览历史">
           <div class="historylist">
             <el-scrollbar height="400px">
-              <PostCard v-for="item in state.bolgList" :key="item.blogId" :item="item" @click="appStore.onShowMyModel()"/>
+              <PostCard v-for="item in state.bolgList" :key="item.blogId" :item="item"
+                @click="appStore.onShowMyModel()" />
             </el-scrollbar>
           </div>
         </el-tab-pane>
@@ -38,7 +54,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAppStore, useUserStore } from '@/store'
-import { getBolgList, getloveBlog } from '@/api/blog'
+import { getBolgList, getloveBlog, getstarBlog } from '@/api/blog'
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { isShowMyModel } = storeToRefs(appStore)
@@ -56,11 +72,19 @@ onMounted(async () => {
         state.bolgList = data
     })
     getmylove()
+    getstar()
 })
+// 喜欢
 const lovelist = ref([])
 const getmylove = async () => {
     const res = await getloveBlog()
     lovelist.value = res.data
+}
+// 收藏
+const starlist = ref([])
+const getstar = async () => {
+    const res = await getstarBlog()
+    starlist.value = res.data
 }
 function close () {
     dialogDOM.value.visible = false
@@ -71,13 +95,16 @@ function close () {
 .my-model {
   --model-width: 960px;
   --model-min-width: 230px;
+
   :deep(.el-dialog) {
     border-radius: 5px;
     background: var(--global-bg);
     width: var(--model-width);
+
     .posts-card {
       height: 287px;
     }
+
     .historylist {
       padding: 20px;
       width: auto;
@@ -201,4 +228,5 @@ function close () {
 .el-tabs--right .el-tabs__content,
 .el-tabs--left .el-tabs__content {
   height: 100%;
-}</style>
+}
+</style>

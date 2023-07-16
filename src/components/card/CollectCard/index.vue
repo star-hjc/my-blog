@@ -1,9 +1,14 @@
 <template>
   <router-link class="title space" :to="`/articles/${item.blogId}`">
-  <div class="collect">
-      <el-card shadow="hover" class="collectcart "> {{ item.title }} </el-card>
-  </div>
-</router-link>
+    <div class="collect">
+      <el-card shadow="hover" class="collectcart ">
+        <div class="love">
+          <div> {{ item.title }}</div>
+          <slot></slot>
+        </div>
+      </el-card>
+    </div>
+  </router-link>
 </template>
 
 <script setup>
@@ -28,6 +33,15 @@ onMounted(() => {
     transition: all 0.8s;
     color: rgb(83, 83, 83);
     border: 0px solid #000;
+    .love {
+      display: flex;
+      justify-content: space-between;
+      padding-right: 10px;
+    }
+    .icon-like:hover {
+      text-shadow: 0 0 5px #FF0000;
+      font-size: 12px;
+    }
 
     &:hover {
       box-shadow: 0 0 20px var(--float-color);
