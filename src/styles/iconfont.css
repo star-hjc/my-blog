@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont";
-  src: 
-    url("@/assets/icon/iconfont.woff2") format("woff2"),
-    url("@/assets/icon/iconfont.woff") format("woff"),
-    url("@/assets/icon/iconfont.ttf") format("truetype");
+  /* Project id 3607597 */
+  src: url('@/assets/icon/iconfont.woff2?t=1689493281430') format('woff2'),
+    url('@/assets/icon/iconfont.woff?t=1689493281430') format('woff'),
+    url('@/assets/icon/iconfont.ttf?t=1689493281430') format('truetype');
 }
 
 .iconfont {
@@ -14,7 +14,35 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-mail-fill:before {
+.icon-mark-fill:before {
+  content: "\e86d";
+}
+
+.icon-mark:before {
+  content: "\e86e";
+}
+
+.icon-like-fill:before {
+  content: "\e870";
+}
+
+.icon-like:before {
+  content: "\e871";
+}
+
+.icon-zan-fill:before {
+  content: "\e872";
+}
+
+.icon-zan:before {
+  content: "\e873";
+}
+
+.icon-look:before {
+  content: "\e898";
+}
+
+.icon-mail:before {
   content: "\e86f";
 }
 
@@ -22,112 +50,20 @@
   content: "\e882";
 }
 
-.icon-wechat-fill:before {
+.icon-wechat:before {
   content: "\e883";
 }
 
-.icon-github-fill:before {
+.icon-github:before {
   content: "\e885";
-}
-
-.icon-weather-3:before {
-  content: "\e752";
-}
-
-.icon-weather-9:before {
-  content: "\e753";
-}
-
-.icon-weather-8:before {
-  content: "\e754";
-}
-
-.icon-weather-11:before {
-  content: "\e755";
-}
-
-.icon-weather-10:before {
-  content: "\e756";
-}
-
-.icon-weather-1:before {
-  content: "\e757";
 }
 
 .icon-weather-2:before {
   content: "\e758";
 }
 
-.icon-weather-12:before {
-  content: "\e759";
-}
-
-.icon-weather-5:before {
-  content: "\e75a";
-}
-
-.icon-weather-13:before {
-  content: "\e75b";
-}
-
-.icon-thunder:before {
-  content: "\e75c";
-}
-
 .icon-weather-4:before {
   content: "\e75d";
-}
-
-.icon-weather-15:before {
-  content: "\e75e";
-}
-
-.icon-hail:before {
-  content: "\e75f";
-}
-
-.icon-weather-17:before {
-  content: "\e760";
-}
-
-.icon-weather-16:before {
-  content: "\e761";
-}
-
-.icon-weather-7:before {
-  content: "\e762";
-}
-
-.icon-weather-19:before {
-  content: "\e763";
-}
-
-.icon-weather-18:before {
-  content: "\e764";
-}
-
-.icon-wind:before {
-  content: "\e765";
-}
-
-.icon-stand-storm:before {
-  content: "\e766";
-}
-
-.icon-floating-dust:before {
-  content: "\e767";
-}
-
-.icon-weather-21:before {
-  content: "\e768";
-}
-
-.icon-haze:before {
-  content: "\e769";
-}
-
-.icon-frost:before {
-  content: "\e76a";
 }
 
 .icon-fahrenheit-degree:before {
@@ -136,66 +72,6 @@
 
 .icon-centigrade:before {
   content: "\e76c";
-}
-
-.icon-weather-20:before {
-  content: "\e76d";
-}
-
-.icon-force-5-wind:before {
-  content: "\e76e";
-}
-
-.icon-force-4-wind:before {
-  content: "\e76f";
-}
-
-.icon-typhoon:before {
-  content: "\e770";
-}
-
-.icon-force-6-wind:before {
-  content: "\e771";
-}
-
-.icon-force-7-wind:before {
-  content: "\e772";
-}
-
-.icon-force-8-wind:before {
-  content: "\e773";
-}
-
-.icon-force-9-wind:before {
-  content: "\e774";
-}
-
-.icon-force-11-wind:before {
-  content: "\e775";
-}
-
-.icon-force-12-wind:before {
-  content: "\e776";
-}
-
-.icon-night1:before {
-  content: "\e777";
-}
-
-.icon-rain:before {
-  content: "\e778";
-}
-
-.icon-sunset:before {
-  content: "\e779";
-}
-
-.icon-temperature:before {
-  content: "\e77a";
-}
-
-.icon-wind-direction:before {
-  content: "\e77b";
 }
 
 .icon-humidity:before {
@@ -208,10 +84,6 @@
 
 .icon-summer:before {
   content: "\e77e";
-}
-
-.icon-force-10-wind:before {
-  content: "\e77f";
 }
 
 .icon-autumn:before {
@@ -292,10 +164,6 @@
 
 .icon-prompt:before {
   content: "\e6c4";
-}
-
-.icon-Incoming_call:before {
-  content: "\e6c5";
 }
 
 .icon-layered:before {
@@ -408,6 +276,10 @@
 
 .icon-eye_protection:before {
   content: "\e6e2";
+}
+
+.icon-heart-copy:before {
+  content: "\e899";
 }
 
 .icon-distance:before {
@@ -722,10 +594,6 @@
   content: "\e735";
 }
 
-.icon-dislike:before {
-  content: "\e736";
-}
-
 .icon-getup:before {
   content: "\e737";
 }
@@ -746,11 +614,11 @@
   content: "\e73b";
 }
 
-.icon-like:before {
+.icon-heart:before {
   content: "\e73c";
 }
 
-.icon-mark:before {
+.icon-star:before {
   content: "\e73d";
 }
 

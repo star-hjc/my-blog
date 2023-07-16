@@ -35,11 +35,11 @@
             <span>{{ item.userName || '用户' }}</span>
           </div>
           <div class="describe-data">
-            <el-icon class="iconfont icon-mark" @click.prevent="onStar" color="#f7cb49" size="1.5rem" />
-            <span>{{ item.stars || 0 }}</span>
-            <el-icon class="iconfont icon-like" @click.prevent="onLike" color="#F56C6C" size="1.5rem" />
-            <span>{{ item.likes || 0 }}</span>
-            <el-icon class="iconfont icon-eye_protection" size="1.5rem" />
+            <el-icon class="iconfont icon-mark-fill" color="#FFCA28" size="1.2rem" />
+            <span>{{ stars || 0 }}</span>
+            <el-icon class="iconfont icon-like-fill" color="#F56C6C" size="1.2rem" />
+            <span>{{ likes || 0 }}</span>
+            <el-icon class="iconfont icon-look" size="1.2rem" />
             <span>{{ item.watch || 0 }}</span>
           </div>
         </div>
@@ -54,8 +54,6 @@
 
 <script setup>
 import { useBlogStore } from '@/store'
-import { starBlog, likeBlog } from '@/api/blog'
-import { throttle } from '@/utils/utils.js'
 const blogStore = useBlogStore()
 const { labels } = storeToRefs(blogStore)
 
@@ -68,6 +66,9 @@ const props = defineProps({
     }
 })
 
+const stars = ref(props.item.stars)
+const likes = ref(props.item.likes)
+
 const label = computed(() => {
     return (id) => { return labels?.value?.find(v => v.id === id)?.name || '未知' }
 })
@@ -76,16 +77,6 @@ const imgErr = (e, isPortrait) => {
     const imgDOM = e.srcElement
     imgDOM.src = isPortrait ? defPortrait : defImg
     imgDOM.onerror = null
-}
-
-const onStar = async () => {
-    await starBlog(props.item.blogId)
-}
-// 喜欢  我不会你这个节流函数你来吧
-var num = ref(props.item.likes)
-const onLike = async () => {
-    num.value++
-    await throttle(likeBlog(props.item.blogId, num.value))
 }
 </script>
 
@@ -216,16 +207,21 @@ const onLike = async () => {
         align-items: center;
         gap: 5px;
 
-        .icon-eye_protection {
+        .iconfont,
+        span {
           cursor: url('@/assets/img/cursor/default.cur'), default;
         }
 
-        .icon-mark:hover {
+        .icon-mark-fill:hover {
           text-shadow: 0 0 5px #FFCA28;
         }
 
-        .icon-like:hover {
-          text-shadow: 0 0 5px #FF0000;
+        .icon-like-fill:hover {
+          text-shadow: 0 0 5px #F56C6C;
+        }
+
+        .icon-look:hover {
+          text-shadow: 0 0 5px #FFFFFF;
         }
       }
     }

@@ -12,13 +12,19 @@
         </IconLayout>
       </div>
       <div class="details">
-        <IconLayout :iconClass="`iconfont icon-eye_protection`" size="1.5rem">
+        <IconLayout :iconClass="`iconfont ${isStar ? 'icon-mark-fill' : 'icon-mark'}`" color="#FFCA28"
+          @onIconClick="onStarBlog" size="1.2rem">
+          <span>收藏数：</span>
+          <span>{{ state.bolgDetails.stars || 0 }}</span>
+        </IconLayout>
+        <IconLayout :iconClass="`iconfont ${like >= 0 ? 'icon-like-fill' : 'icon-like'}`" color="#F56C6C"
+          @onIconClick="onLikeBlog" size="1.2rem">
+          <span>喜欢数：</span>
+          <span>{{ state.bolgDetails.likes || 0 }}</span>
+        </IconLayout>
+        <IconLayout :iconClass="`iconfont icon-look`" size="1.2rem">
           <span>观看数：</span>
           <span>{{ state.bolgDetails.watch || 0 }}</span>
-        </IconLayout>
-        <IconLayout :iconClass="`iconfont icon-mark`" size="1.5rem">
-          <span>收藏数：</span>
-          <span>{{ state.bolgDetails.likes || 0 }}</span>
         </IconLayout>
       </div>
     </MainTopBar>
@@ -54,7 +60,7 @@ import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useRoute } from 'vue-router'
 import { useAppStore, useUserStore, useBlogStore } from '@/store'
-import { getBolgDetails, setBolgDetails } from '@/api/blog'
+import { getBolgDetails, setBolgDetails, getStarAndLike, starBlog, likeBlog } from '@/api/blog'
 import { getVisits } from '@/api/global'
 import { onBeforeRouteUpdate } from 'vue-router'
 
@@ -62,6 +68,7 @@ const appStore = useAppStore()
 const userStore = useUserStore()
 
 const { theme } = storeToRefs(appStore)
+const { userId } = storeToRefs(userStore)
 
 const state = reactive({
     bolgDetails: {},
@@ -74,6 +81,13 @@ const catalogDom = ref(null)
 const content = ref('')
 const catalogData = ref('')
 const isShowEditBtn = ref(true)
+const isStar = ref(false)
+const starTimer = ref()
+const starNum = ref(0)
+const like = ref(0)
+const likeTimer = ref()
+const likeNum = ref(0)
+
 const isExistEditBtn = computed(() => userStore.code === state.bolgDetails.code)
 
 onMounted(async () => {
@@ -92,6 +106,12 @@ async function init (blogId) {
         if (!data) return
         useBlogStore().setData({ ...data })
     })
+    if (userId) {
+        getStarAndLike(blogId).then(({ data }) => {
+            isStar.value = data.star
+            like.value = data.like
+        })
+    }
 }
 
 onBeforeRouteUpdate((to) => {
@@ -101,6 +121,35 @@ onBeforeRouteUpdate((to) => {
 
 function onSwitch () {
     setPostsZindex()
+}
+
+function onStarBlog () {
+    isStar.value = !isStar.value
+    isStar.value ? state.bolgDetails.stars++ : state.bolgDetails.stars--
+    starNum.value++
+    if (starTimer.value) clearTimeout(starTimer.value)
+    starTimer.value = setTimeout(() => {
+        if (starNum.value % 2 !== 0) {
+            starBlog(state.blogId).then(({ message, data: { state, type } }) => {
+                if (state) ElMessage(message)
+                isStar.value = type === 1
+            })
+            starNum.value = 0
+        }
+    }, 1000)
+}
+
+function onLikeBlog () {
+    if (like.value === 0) ElMessage('今天的点赞数已满')
+    likeNum.value++
+    if (likeNum.value < like.value) state.bolgDetails.likes++
+    if (likeTimer.value) clearTimeout(likeTimer.value)
+    likeTimer.value = setTimeout(() => {
+        likeBlog(state.blogId, likeNum.value).then(({ message, data }) => {
+            ElMessage(message)
+        })
+        likeNum.value = 0
+    }, 1000)
 }
 
 function onSave (text, catalog) {

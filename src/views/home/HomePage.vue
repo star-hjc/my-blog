@@ -27,8 +27,11 @@
             <IconLayout iconClass="iconfont icon-eye_protection" size="1.5rem">
               <span class="icon-title">热度优先</span>
             </IconLayout>
-            <IconLayout iconClass="iconfont icon-like" color="#F56C6C" size="1.5rem">
+            <IconLayout iconClass="iconfont icon-heart" color="#F56C6C" size="1.5rem">
               <span class="icon-title">点赞优先</span>
+            </IconLayout>
+            <IconLayout iconClass="iconfont icon-star" color="#FFCA28" size="1.5rem">
+              <span class="icon-title">收藏优先</span>
             </IconLayout>
             <IconLayout iconClass="iconfont icon-volume" size="1.5rem">
               <span>公告：</span>
@@ -61,13 +64,10 @@
 import PageFrame from '@/layouts/PageFrame.vue'
 import MainTopBar from '@/layouts/MainTopBar.vue'
 import MainContentBar from '@/layouts/MainContentBar.vue'
-import { useAppStore } from '@/store'
 import { useBlogStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { getBolgList } from '@/api/blog'
 import { onMounted } from 'vue'
-const appStore = useAppStore()
-// import { useRouter } from 'vue-router';
 const blogStore = useBlogStore()
 const mainTopBarDOM = ref(null)
 const pageFrameDOM = ref(null)
@@ -86,9 +86,9 @@ onMounted(async () => {
 
 const homeIconBox = ref([
     { id: 0, icon: 'icon-QQ', title: 'QQ', content: '59476905' },
-    { id: 1, icon: 'icon-wechat-fill', title: '微信', content: 'hjc59476905' },
-    { id: 2, icon: 'icon-github-fill', title: 'GitHub', content: 'hjc59476905' },
-    { id: 3, icon: 'icon-mail-fill', title: '邮箱', content: 'hjc59476905@163.com' }
+    { id: 1, icon: 'icon-wechat', title: '微信', content: 'hjc59476905' },
+    { id: 2, icon: 'icon-github', title: 'GitHub', content: 'hjc59476905' },
+    { id: 3, icon: 'icon-mail', title: '邮箱', content: 'hjc59476905@163.com' }
 ])
 
 function onToPageInsideContent () {
