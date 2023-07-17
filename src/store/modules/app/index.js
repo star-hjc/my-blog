@@ -29,7 +29,9 @@ export default defineStore({
             /** 显示右侧菜单 */
             isShowRigthMenuModer: false,
             /** 显示个人中心 */
-            isShowMyModel: false
+            isShowMyModel: false,
+            // 显示添加博客模块
+            isShowAddBlog: false
         }
     },
     actions: {
@@ -76,6 +78,9 @@ export default defineStore({
                 htmlDOM.setAttribute('data-theme', 'light')
             }
             localStorage.setItem('theme', this.theme)
+        },
+        OnShowAddBlog () {
+            this.isShowAddBlog = true
         }
     },
     getters: {

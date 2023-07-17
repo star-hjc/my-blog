@@ -26,6 +26,11 @@
                                 <span v-loading.fullscreen.lock="fullscreenLoading" @click="appStore.onShowMyModel()">个人信息</span>
                             </IconLayout>
                         </el-dropdown-item>
+                        <el-dropdown-item>
+                            <IconLayout :iconClass="`iconfont icon-nickname`" size="1rem">
+                                <span v-loading.fullscreen.lock="fullscreenLoading" @click="appStore.OnShowAddBlog()">添加博客</span>
+                            </IconLayout>
+                        </el-dropdown-item>
                         <!-- <el-dropdown-item>
                             <IconLayout :iconClass="`iconfont icon-respond`" size="1rem">
                                 <span>消息中心</span>

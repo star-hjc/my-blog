@@ -17,6 +17,7 @@
     <!-- 右侧菜单 -->
     <RigthMenuModer />
     <MyModel />
+    <AddBlog />
     <!-- 右下角菜单 -->
     <transition name="animate__animated animate__bounce" enter-active-class="animate__backInRight"
         leave-active-class="animate__backOutRight" appear>
@@ -28,6 +29,7 @@
 import TopBar from './TopBar.vue'
 import FootBar from './FootBar.vue'
 import MyModel from './modules/MyModel.vue'
+import AddBlog from './modules/AddBlog.vue'
 import LoginModel from './modules/LoginModel.vue'
 import SearchModal from './modules/SearchModal.vue'
 import RigthMenuModer from './modules/RigthMenuModer.vue'
