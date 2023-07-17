@@ -43,7 +43,7 @@
               <div class="login-method">
                 <el-icon class="iconfont icon-QQ txt-float" size="1.8em" title="QQ登录"
                   @click="ElMessage.warning('暂未开发...')" />
-                <el-icon class="iconfont icon-wechat-fill txt-float" size="1.8em" title="微信登录"
+                <el-icon class="iconfont icon-wechat txt-float" size="1.8em" title="微信登录"
                   @click="ElMessage.warning('暂未开发...')" />
               </div>
             </div>
