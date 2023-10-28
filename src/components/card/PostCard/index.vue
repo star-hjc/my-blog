@@ -58,13 +58,14 @@ const blogStore = useBlogStore()
 const { labels } = storeToRefs(blogStore)
 
 const defImg = new URL('../../../assets/img/def.jpg', import.meta.url).href
-const defPortrait = ref(createPortrait({ txt: '用户', limit: true }))
 const props = defineProps({
     item: {
         type: Object,
         required: true
     }
 })
+
+const defPortrait = ref(createPortrait({ txt: props.item.userName || '用户', limit: true }))
 
 const stars = ref(props.item.stars)
 const likes = ref(props.item.likes)

@@ -21,7 +21,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="isShowAddBlog = false">取消</el-button>
-          <el-button type="primary" @click="isShowAddBlog = false">
+          <el-button type="primary" @click="save">
             确定
           </el-button>
         </span>
@@ -33,6 +33,7 @@
 import { reactive } from 'vue'
 import { useAppStore } from '@/store'
 import { ElMessageBox } from 'element-plus'
+import { addBolgDetails } from '@/api/blog'
 const appStore = useAppStore()
 const { isShowAddBlog } = storeToRefs(appStore)
 
@@ -40,10 +41,19 @@ const form = reactive({
     title: '',
     content: ''
 })
+
+const save = async () => {
+    openLode()
+    await addBolgDetails({ isDraft: true, content: form.content, title: form.title }).then(data => { if (data) location.reload() })
+    isShowAddBlog.value = false
+}
+
 const handleClose = () => {
     ElMessageBox.confirm('确定要关闭弹窗吗?')
         .then(() => {
             // 确定关闭弹窗不保存
+            // 这里调用接口
+            // 没写添加博客的内容
             isShowAddBlog.value = false
         })
         .catch(() => {
@@ -55,6 +65,7 @@ const handleClose = () => {
 .avatar-uploader {
   border: 1px solid red;
 }
+
 .avatar {
   width: 178px;
   height: 178px;

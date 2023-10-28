@@ -31,8 +31,8 @@ export const getBolgDetails = (blogId) => {
 export const addBolgDetails = (data) => {
     return requst({
         url: `/api/blog/add`,
-        method: 'get',
-        params: { data }
+        method: 'post',
+        data
     })
 }
 

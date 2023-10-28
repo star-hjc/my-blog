@@ -71,8 +71,11 @@ onMounted(async () => {
     getBolgList().then(({ data }) => {
         state.bolgList = data
     })
-    getmylove()
-    getstar()
+    // 验证登录状态才获取
+    if (code) {
+        getmylove()
+        getstar()
+    }
 })
 // 喜欢
 const lovelist = ref([])

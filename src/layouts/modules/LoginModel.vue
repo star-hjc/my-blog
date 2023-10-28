@@ -110,6 +110,7 @@ async function onEnter (form) {
     form.validate((valid) => {
         if (!valid) return
         const { user, mail, pwd, validcode } = formData
+        openLode()
         login({ user: type.value > 0 ? mail : user, pwd, validcode, type: type.value }).then(({ data, message }) => {
             if (data) {
                 ElMessage.success(message)

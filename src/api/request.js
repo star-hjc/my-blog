@@ -1,7 +1,8 @@
 /** axios封装 */
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { useAppStore } from '@/store'
+import { useAppStore, useUserStore } from '@/store'
+
 const { VITE_REQUIST_URL } = import.meta.env
 const axiosInstance = axios.create({
     baseURL: VITE_REQUIST_URL,
@@ -32,10 +33,13 @@ axiosInstance.interceptors.request.use(
  */
 axiosInstance.interceptors.response.use(
     response => {
+        openLode(false)
         return response.data
     },
     error => {
         if (error?.response?.data?.type === 1) {
+            localStorage.removeItem('TOKEN')
+            useUserStore().$reset()
             useAppStore().onShowLoginModel()
         }
         if (error && error.response) {
@@ -55,8 +59,8 @@ axiosInstance.interceptors.response.use(
                 505: 'http版本不支持该请求'
             }
             ElMessage.error(error.response?.data?.message || errMessage[error.response.status] || '连接错误')
-            openLode(false)
         }
+        openLode(false)
         return error
     }
 )

@@ -9,19 +9,23 @@ export default defineStore({
             portrait: createPortrait({ txt: '用户', limit: true }),
             WeChat: '',
             QQ: '',
+            mali: '',
             /** 个签 */
             personalSignature: ''
         }
     },
     actions: {
         setData (partial) {
+            if (Object.keys(partial).includes('userName')) {
+                partial.portrait = createPortrait({ txt: partial.userName, limit: true })
+            }
             this.$patch(partial)
         }
     },
     getters: {
         getState: (state) => {
             return (key) => {
-                return key ? state[key] : { ...state }
+                return state[key] ? state[key] : { ...state }
             }
         }
     }

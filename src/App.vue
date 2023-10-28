@@ -31,8 +31,9 @@ onMounted(async () => {
     })
     const token = localStorage.getItem('TOKEN')
     if (token) {
-        const { code, userId } = jwtDecode(token)
-        userStore.setData({ code, userId })
+        const { code, userId, nickName, mali
+        } = jwtDecode(token)
+        userStore.setData({ code, userId, userName: nickName, mali })
     }
     /** 关闭加载动画 */
     openLode(3000)
