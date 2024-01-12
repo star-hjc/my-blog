@@ -1,12 +1,12 @@
 import toolComponents from './tool'
 import cardComponents from './card'
 
-const components = [cardComponents, toolComponents]
+const components = Object.entries({ ...cardComponents, ...toolComponents })
 
 export default {
     install (app) {
-        components.forEach(item => {
-            app.use(item)
-        })
+        for (const [key, component] of components) {
+            app.component(key, component)
+        }
     }
 }

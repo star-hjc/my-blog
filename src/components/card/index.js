@@ -7,16 +7,12 @@ import RunLogCard from './RunLogCard/index.vue'
 import UserCard from './UserCard/index.vue'
 import CollectCard from './CollectCard/index.vue'
 export default {
-    install (app) {
-        app.component({
-            GlassCard,
-            TimeCard,
-            WeatherCard,
-            PostCard,
-            DefCard,
-            UserCard,
-            RunLogCard,
-            CollectCard
-        })
-    }
+    GlassCard,
+    TimeCard,
+    WeatherCard,
+    PostCard,
+    DefCard,
+    UserCard,
+    RunLogCard,
+    CollectCard
 }

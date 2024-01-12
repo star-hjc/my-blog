@@ -21,17 +21,16 @@ import 'element-plus/es/components/message-box/style/css'
 import 'md-editor-v3/lib/style.css'
 
 /** 自定义组件 */
-import initComponents from './components'
+import globalComponents from './components'
 
 const app = createApp(App)
 /** 自定义组件注册 */
-initComponents.install(app)
+app.use(globalComponents)
 /** 路由 - VueRouter */
 app.use(router)
 /** 自定义指令 */
 app.use(directives)
 /** 状态管理器 - Pinia */
 app.use(store)
-
 app.mount('#app')
 

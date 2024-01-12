@@ -4,8 +4,4 @@ import RigthSide from './RigthSide/index.vue'
 import IconLayout from './IconLayout/index.vue'
 import NoticeScrol from './NoticeScrol/index.vue'
 
-export default {
-    install (app) {
-        app.component({ TextSubtitle, NumFlop, RigthSide, IconLayout, NoticeScrol })
-    }
-}
+export default { TextSubtitle, NumFlop, RigthSide, IconLayout, NoticeScrol }
