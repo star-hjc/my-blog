@@ -106,7 +106,7 @@ async function init (blogId) {
         if (!data) return
         useBlogStore().setData({ ...data })
     })
-    if (userId) {
+    if (userId.value) {
         getStarAndLike(blogId).then(({ data }) => {
             isStar.value = data.star
             like.value = data.like

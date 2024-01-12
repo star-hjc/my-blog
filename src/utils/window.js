@@ -6,11 +6,10 @@
 function openLode (openOrTimeout = true) {
     const pageLode = document.getElementById('page-lode')
     if (typeof openOrTimeout === 'number') {
-        const lode = setTimeout(() => {
+        pageLode.style.display = ''
+        setTimeout(() => {
             pageLode.style.display = 'none'
-            clearTimeout(lode)
         }, openOrTimeout)
-
         return
     }
     pageLode.style.display = openOrTimeout ? '' : 'none'

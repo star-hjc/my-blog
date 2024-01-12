@@ -27,7 +27,7 @@ onMounted(async () => {
     })
     getState().then(({ data }) => {
         if (!data) return
-        blogStore.setData({ ...data.data })
+        blogStore.setData({ ...data })
     })
     const token = localStorage.getItem('TOKEN')
     if (token) {

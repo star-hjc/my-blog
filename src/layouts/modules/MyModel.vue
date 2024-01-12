@@ -58,7 +58,7 @@ import { getBolgList, getloveBlog, getstarBlog } from '@/api/blog'
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { isShowMyModel } = storeToRefs(appStore)
-const { portrait, code, userName } = storeToRefs(userStore)
+const { portrait, code, userName, userId } = storeToRefs(userStore)
 
 const dialogDOM = ref(null)
 
@@ -71,8 +71,10 @@ onMounted(async () => {
     getBolgList().then(({ data }) => {
         state.bolgList = data
     })
-    getmylove()
-    getstar()
+    if (userId.value) {
+        getmylove()
+        getstar()
+    }
 })
 // 喜欢
 const lovelist = ref([])
