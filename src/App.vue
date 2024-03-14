@@ -33,7 +33,7 @@ onMounted(async () => {
     if (token) {
         const { code, userId, nickName, mali
         } = jwtDecode(token)
-        userStore.setData({ code, userId, userName: nickName, mali })
+        userStore.setData({ code, userId, userName: nickName || code, mali })
     }
     /** 关闭加载动画 */
     openLode(3000)

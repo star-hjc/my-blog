@@ -72,7 +72,7 @@ onMounted(async () => {
         state.bolgList = data
     })
     // 验证登录状态才获取
-    if (code) {
+    if (code.value) {
         getmylove()
         getstar()
     }
